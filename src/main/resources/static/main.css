@@ -1,10 +1,14 @@
 
 #letters{
-	width: 150px;
+	width: 280px;
 	height: 800px;
+	padding: 10px;
+	margin: 10px;
 }
 
 .letter-button{
+	padding: 3px;	
 	text-align: center;
 	width: 30px;
+	margin: 5px;
 }
