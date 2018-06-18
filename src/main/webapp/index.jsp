@@ -18,12 +18,16 @@
 </head>
 <body>
 	<h1>Hangman game.</h1>
-	${attempts} <br>
-		${word}<br>
-		${guess}
+	${attempts}
+	<br> ${word}
+	<br> ${guess}
 	<div id="letters">
-			<c:forTokens items = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z" delims = "," var = "name">
-               <button  id = "${name}" class="btn btn-default letter-button" onclick="letterClicked(this.value)" value = "${name}">${name}</button> 
-      </c:forTokens>		
-	</div>	
+		<button id="connect" class="btn btn-default" type="submit">
+			Connect</button>
+		<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z"
+			delims="," var="name">
+			<button id="${name}" class="btn btn-default letter-button"
+				onclick="letterClicked(this.value)" value="${name}">${name}</button>
+		</c:forTokens>
+	</div>
 </body>

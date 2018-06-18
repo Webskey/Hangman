@@ -7,6 +7,13 @@ public class Hangman {
 	
 	private String word;
 	private int attempts;
+	private String letter;
+	private String guess;
+	
+	public Hangman() {}
+	public Hangman(String letter) {
+		this.letter = letter;
+	}
 	
 	public void setWord(String word) {
 		this.word = word;
@@ -14,6 +21,14 @@ public class Hangman {
 	
 	public String getWord() {
 		return word;
+	}
+	
+	public void setGuess(String guess) {
+		this.guess = guess;
+	}
+	
+	public String getGuess() {
+		return guess;
 	}
 	
 	public void setAttempts(int attempts) {
@@ -28,5 +43,12 @@ public class Hangman {
 		return word.contains(String.valueOf(letter));
 	}
 	
+	public void setLetter(String letter) {
+		this.letter = letter;
+	}
+	
+	public String getLetter() {
+		return letter;
+	}
 	
 }
