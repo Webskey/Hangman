@@ -1,7 +1,6 @@
 package org.webskey.hangman.service;
 
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,29 +22,34 @@ public class Servvice {
 		return hangman.getWord().toUpperCase();
 	}
 
-	public String getGuess(String word) {
-		hangman.setGuess(String.join(" ", word.chars().mapToObj(c -> "_").collect(Collectors.toList())));
+	public String getGuess() {
+		hangman.setGuess(hangman.getWord().chars().mapToObj(c -> "_").collect(Collectors.joining()));
 		return hangman.getGuess();
 	}
 
 	public Hangman play(String letter) {
 		hangman.setLetter(letter);
 		if(hangman.getWord().contains(letter)) {
-			hangman.setGuess(replace(hangman.getWord(), hangman.getGuess(), letter));			
+			hangman.setGuess(replace(hangman.getWord(), hangman.getGuess(), letter));		
 		} else {
 			hangman.setAttempts(hangman.getAttempts() - 1);						
 		}
-		System.out.println("Guess " + hangman.getGuess());
+		
+		if(hangman.getWord().equalsIgnoreCase(hangman.getGuess())){
+			hangman.setGuess("WYGRALES!!! GRATULACJE :)");
+		}
+		
+		if(hangman.getAttempts() < 1) {
+			hangman.setGuess("PRZEGRALES!!! SPROBOJ JESZCZE RAZ.");
+		}
 		return hangman;
 	}
 
-	public String replace(String word, String guess, String letter) {
-		char[] wordA = word.toCharArray();		
-		char[] guessA = guess.replaceAll(" ", "").toCharArray();		
-		for(int i = 0; i < wordA.length; i++)
-			if(String.valueOf(wordA[i]).equalsIgnoreCase(letter))
-				guessA[i] = wordA[i];
-		System.out.println(guessA);
-		return Stream.of(guessA).map(x -> String.valueOf(x)).collect(Collectors.joining(" "));
+	public String replace(String word, String guess, String letter) {			
+		StringBuilder sb = new StringBuilder(guess);		
+		for(int i = 0; i < word.length(); i++)
+			if(String.valueOf(word.charAt(i)).equalsIgnoreCase(letter))
+				sb.setCharAt(i, word.charAt(i));
+		return sb.toString();
 	}
 }

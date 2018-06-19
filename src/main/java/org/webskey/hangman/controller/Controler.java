@@ -17,15 +17,14 @@ public class Controler {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("word", service.getWord());
-		model.addAttribute("guess", service.getGuess(service.getWord()));
+		model.addAttribute("guess", service.getGuess());
 		model.addAttribute("attempts", service.getAttempts());
 		return "index";
 	}
 	
 	@MessageMapping("/message")
 	@SendTo("/broker/conversation")
-	public Hangman messageReceived(Hangman hangman) throws Exception {
-		
+	public Hangman messageReceived(Hangman hangman) throws Exception {		
 		Thread.sleep(1000); // simulated delay		
 		return service.play(hangman.getLetter());
 	}

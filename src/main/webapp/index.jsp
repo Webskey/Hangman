@@ -17,17 +17,21 @@
 <meta charset="utf-8">
 </head>
 <body>
-	<h1>Hangman game.</h1>
-	${attempts}
-	<br> ${word}
-	<br> ${guess}
-	<div id="letters">
+	<div id="welcome">
+		<h1>Siema, witam w grze w wisielca :)</h1>
 		<button id="connect" class="btn btn-default" type="submit">
 			Connect</button>
-		<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z"
-			delims="," var="name">
-			<button id="${name}" class="btn btn-default letter-button"
-				onclick="letterClicked(this.value)" value="${name}">${name}</button>
-		</c:forTokens>
+	</div>
+
+	<div id="game">
+		<h1 id="guess">${guess}</h1>
+		<h1 id="attempts">${attempts}</h1>
+		<div id="letters">
+			<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z"
+				delims="," var="name">
+				<button id="${name}" class="btn btn-default letter-button"
+					onclick="letterClicked(this.value)" value="${name}">${name}</button>
+			</c:forTokens>
+		</div>
 	</div>
 </body>
