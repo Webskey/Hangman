@@ -10,10 +10,10 @@ import org.webskey.hangman.gameengine.Hangman;
 import org.webskey.hangman.service.Servvice;
 @Controller
 public class Controler {
-	
+
 	@Autowired
 	Servvice service;
-	
+
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("word", service.getWord());
@@ -21,10 +21,17 @@ public class Controler {
 		model.addAttribute("attempts", service.getAttempts());
 		return "index";
 	}
-	
+
 	@MessageMapping("/message")
-	@SendTo("/broker/conversation")
+	@SendTo("/broker/main")
 	public Hangman messageReceived(Hangman hangman) throws Exception {		
+		Thread.sleep(1000); // simulated delay		
+		return service.play(hangman.getLetter());
+	}
+
+	@MessageMapping("/room/{num}")
+	@SendTo("/broker/room/{num}")
+	public Hangman room(Hangman hangman) throws Exception {		
 		Thread.sleep(1000); // simulated delay		
 		return service.play(hangman.getLetter());
 	}

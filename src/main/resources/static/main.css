@@ -3,8 +3,8 @@
 }
 
 #game {
-	position:relative;
-	width:30%;
+	position: relative;
+	width: 30%;
 	display: none;
 	margin: auto;
 	padding: 10px;
@@ -29,4 +29,12 @@
 	text-align: center;
 	width: 30px;
 	margin: 5px;
+}
+
+#lobby {
+	position: relative;
+	width: 30%;
+	display: none;
+	margin: auto;
+	padding: 10px;
 }

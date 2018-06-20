@@ -23,6 +23,13 @@
 			Connect</button>
 	</div>
 
+	<div id="lobby">
+		<button id="room1" class="btn btn-default btn-room" onclick="joinRoom(1)">ROOM 1</button>
+		<button id="room2" class="btn btn-default btn-room" onclick="joinRoom(2)">ROOM 2</button>
+		<button id="room3" class="btn btn-default btn-room" onclick="joinRoom(3)">ROOM 3</button>
+		<button id="room4" class="btn btn-default btn-room" onclick="joinRoom(4)">ROOM 4</button>
+	</div>
+
 	<div id="game">
 		<h1 id="guess">${guess}</h1>
 		<h1 id="attempts">${attempts}</h1>
