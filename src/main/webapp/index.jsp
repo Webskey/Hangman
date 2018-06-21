@@ -19,6 +19,7 @@
 <body>
 	<div id="welcome">
 		<h1>Siema, witam w grze w wisielca :)</h1>
+		<input id = "username"  class="form-control" type="text">
 		<button id="connect" class="btn btn-default" type="submit">
 			Connect</button>
 	</div>
