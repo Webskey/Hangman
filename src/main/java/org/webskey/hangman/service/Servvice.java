@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.webskey.hangman.gameengine.Hangman;
+import org.webskey.hangman.model.Hangman;
 
 @Service
 public class Servvice {
@@ -16,15 +16,11 @@ public class Servvice {
 		hangman.setAttempts(5);
 		return hangman.getAttempts();
 	}
-
-	public String getWord() {
-		hangman.setWord("Apple".toUpperCase());
-		return hangman.getWord().toUpperCase();
-	}
-
-	public String getGuess() {
+	
+	public Hangman setWord(String word) {
+		hangman.setWord(word.toUpperCase());
 		hangman.setGuess(hangman.getWord().chars().mapToObj(c -> "_").collect(Collectors.joining()));
-		return hangman.getGuess();
+		return hangman;
 	}
 
 	public Hangman play(String letter) {
@@ -36,11 +32,11 @@ public class Servvice {
 		}
 		
 		if(hangman.getWord().equalsIgnoreCase(hangman.getGuess())){
-			hangman.setGuess("WYGRALES!!! GRATULACJE :)");
+			hangman.setGuess("win");
 		}
 		
 		if(hangman.getAttempts() < 1) {
-			hangman.setGuess("PRZEGRALES!!! SPROBOJ JESZCZE RAZ.");
+			hangman.setGuess("lost");
 		}
 		return hangman;
 	}

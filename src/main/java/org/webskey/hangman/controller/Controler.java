@@ -7,26 +7,43 @@ import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.webskey.hangman.gameengine.Hangman;
+import org.webskey.hangman.model.Hangman;
+import org.webskey.hangman.model.Hello;
 import org.webskey.hangman.service.Servvice;
+
 @Controller
 public class Controler {
 
 	@Autowired
-	Servvice service;
+	private Servvice service;
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		model.addAttribute("word", service.getWord());
-		model.addAttribute("guess", service.getGuess());
 		model.addAttribute("attempts", service.getAttempts());
 		return "index";
 	}
+	
+	@MessageMapping("/room/{num}/canIjoin")
+	@SendTo("/broker/room/{num}")
+	public Hello checkingFull() throws Exception {		
+		return new Hello("Imhere");
+	}
+	
+	@MessageMapping("/room/{num}/sayingHello")
+	@SendTo("/broker/room")
+	public Hello checking2Full() throws Exception {		
+		return new Hello("Imhere");
+	}
+	
+	@MessageMapping("/room/{num}/setWord")
+	@SendTo("/broker/room/{num}/game")
+	public Hangman setWord(Hangman hangman) throws Exception {		
+		return service.setWord(hangman.getWord());
+	}
 
 	@SubscribeMapping("/room/{num}")
-	public String getChatInit() {
-		System.out.println("SubscribingMapping");	    
-		return "test";
+	public Hello subscribingRoom() {
+		return new Hello("Saying Hello");
 	}
 
 	@MessageMapping("/users")

@@ -1,4 +1,4 @@
-package org.webskey.hangman.gameengine;
+package org.webskey.hangman.model;
 
 import org.springframework.stereotype.Component;
 
