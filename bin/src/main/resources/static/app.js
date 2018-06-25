@@ -3,10 +3,10 @@ var room = null;
 var players = null;
 var inRoom = false;
 var player = null;
-var room1 = null;
-var room2 = null;
-var room3 = null;
-var room4 = null;
+var wroom = null;
+var roomq = null;
+var roomqq = null;
+var roomek = null;
 var word = null;
 
 function connect() {
@@ -33,7 +33,7 @@ function checkFull(num){
 	room = num;
 	players = 0;
 
-	room1 = stompClient.subscribe('/broker/room/' + num, function (hangman) {
+	roomq = stompClient.subscribe('/broker/room/' + num, function (hangman) {
 		if(JSON.parse(hangman.body).hello === undefined){
 			if(JSON.parse(hangman.body).guess == "win" || JSON.parse(hangman.body).guess == "lost")
 				endGame(JSON.parse(hangman.body).guess);
@@ -45,17 +45,17 @@ function checkFull(num){
 		}
 	});
 
-	room2 = stompClient.subscribe('/receiver/room/' + num, function (hangman) {		
+	wroom = stompClient.subscribe('/receiver/room/' + num, function (hangman) {		
 		console.log("Subscribbed room nr: " + room);
 		stompClient.send("/receiver/room/" + num + '/canIjoin', {});	
 	});
 
-	room3 = stompClient.subscribe('/broker/room/' + num + "/players", function (hangman) {		
+	roomqq = stompClient.subscribe('/broker/room', function (hangman) {		
 		players = players + 1;
 		console.log("Added players " + players);
 	});
 
-	room4 = stompClient.subscribe('/broker/room/' + num + "/game", function (hangman) {			
+	roomek = stompClient.subscribe('/broker/room/' + num + "/game", function (hangman) {			
 		$('#guess').text(JSON.parse(hangman.body).guess);
 		startGame();
 	});
@@ -76,45 +76,67 @@ function checku(players){
 		player2();
 	if(players >= 3) {
 		console.log("Room " + room + " is full");
-		exitRoom();
+		roomq.unsubscribe();
+		wroom.unsubscribe();
+		roomqq.unsubscribe();
+		roomek.unsubscribe();
 	}
 }
 
-function exitRoom(){
-	console.log("Leaving room " + room);
-	inRoom = false;
-	room = null;
-	players = 0;
-	player = null;
-	room1.unsubscribe();
-	room2.unsubscribe();
-	room3.unsubscribe();
-	room4.unsubscribe();
-	$("#game").hide();
-	$("#lobby").show();
-	$("#player1").hide();
-	$("#player2").hide();
-}
-
 function player1(){
-	room2.unsubscribe();
-	room3.unsubscribe();
 	player = 1;
 	inRoom = true;
 	//$("#lobby").hide();		
 	$("#player1").show();	
-	//$('.letter-button').attr("disabled", true);
+	$('.letter-button').attr("disabled", true);
 }
 
 function player2(){
 	console.log("Player2");
 	player = 2;
 	inRoom = true;
-	room2.unsubscribe();
-	room3.unsubscribe();
 	//$("#lobby").hide();	
 	$("#player2").show();	
-	$('.letter-button').attr("disabled", false);
+}
+
+function startGame(){
+	$("#game").show();
+	$("#player1").hide();
+	$("#player2").hide();
+}
+
+function endGame(result){
+	$("#game").hide();
+	console.log("You " + result);
+	var r = "#" + result;
+	console.log(r);
+	$(r).show();
+	
+	setTimeout(function() {
+		$(r).hide();
+		if(player == 1)
+			player2();
+		else
+			player1();
+	}, 5000);
+}
+
+function setWord(){
+	word = $('#word').val();
+	console.log(word);
+	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': word}));
+}
+
+function letterClicked(value) {	
+	var id = "#"+value;
+	$(id).prop("disabled", true);	
+	stompClient.send("/receiver/room/" + room, {}, JSON.stringify({'letter': value}));
+}
+
+function play(letter, guess, attempts) {	
+	console.log("Choosen letter : " + letter);	
+	$('#guess').text(guess);
+	$('#attempts').text(attempts);
 }
 
 $(function () {

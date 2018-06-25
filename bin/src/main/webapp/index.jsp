@@ -14,7 +14,6 @@
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <script src="/app.js"></script>
-<script src="/game.js"></script>
 <meta charset="utf-8">
 </head>
 <body>
@@ -51,13 +50,10 @@
 					onclick="letterClicked(this.value)" value="${name}">${name}</button>
 			</c:forTokens>
 		</div>
-		<button id="exit-room" class="btn btn-default" onclick="exitRoom()">
-			Exit room</button>
 	</div>
 
 	<div id="player1" class="container">
-		<input id="word" class="form-control" type="text" autocomplete="off"
-			placeholder="Word to guess...">
+		<input id="word" class="form-control" type="text">
 		<button id="setWord" class="btn btn-default" onclick="setWord()">
 			Play</button>
 	</div>

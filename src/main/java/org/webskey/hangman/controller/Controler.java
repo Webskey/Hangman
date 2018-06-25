@@ -30,7 +30,7 @@ public class Controler {
 	}
 	
 	@MessageMapping("/room/{num}/sayingHello")
-	@SendTo("/broker/room")
+	@SendTo("/broker/room/{num}/players")
 	public Hello checking2Full() throws Exception {		
 		return new Hello("Imhere");
 	}
