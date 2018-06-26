@@ -1,5 +1,6 @@
 function startGame(){
 	$("#game").show();
+	$("#6").show();
 	$("#player1").hide();
 	$("#player2").hide();
 }
@@ -10,14 +11,14 @@ function endGame(result){
 	var r = "#" + result;
 	console.log(r);
 	$(r).show();
-	
+
 	setTimeout(function() {
 		$(r).hide();
 		if(player == 1)
 			player2();
 		else
 			player1();
-	}, 5000);
+	}, 4000);
 }
 
 function setWord(){
@@ -28,7 +29,7 @@ function setWord(){
 }
 
 function letterClicked(value) {	
-	var id = "#"+value;
+	var id = "#" + value;
 	$(id).prop("disabled", true);	
 	stompClient.send("/receiver/room/" + room, {}, JSON.stringify({'letter': value}));
 }
@@ -37,4 +38,6 @@ function play(letter, guess, attempts) {
 	console.log("Choosen letter : " + letter);	
 	$('#guess').text(guess);
 	$('#attempts').text(attempts);
+	$('.game-progress').hide();
+	$('#' + attempts).show();
 }

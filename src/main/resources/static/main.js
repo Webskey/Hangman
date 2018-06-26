@@ -36,8 +36,9 @@ function checkFull(num){
 	room1 = stompClient.subscribe('/broker/room/' + num, function (hangman) {
 		if(JSON.parse(hangman.body).hello === undefined){
 			if(JSON.parse(hangman.body).guess == "win" || JSON.parse(hangman.body).guess == "lost")
-				endGame(JSON.parse(hangman.body).guess);
-			else
+				setTimeout(function() {
+					endGame(JSON.parse(hangman.body).guess);
+				}, 2000);			
 				play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
 		}else{
 			console.log("Sending to sayingHello");
@@ -57,6 +58,7 @@ function checkFull(num){
 
 	room4 = stompClient.subscribe('/broker/room/' + num + "/game", function (hangman) {			
 		$('#guess').text(JSON.parse(hangman.body).guess);
+		$('#attempts').text(JSON.parse(hangman.body).attempts);
 		startGame();
 	});
 

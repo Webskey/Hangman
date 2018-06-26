@@ -9,20 +9,20 @@
 <link rel="shortcut icon" type="image/png"
 	href="https://png.icons8.com/windows/1600/suicide-risk.png" />
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/main.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script src="/app.js"></script>
+<script src="/main.js"></script>
 <script src="/game.js"></script>
 <meta charset="utf-8">
 </head>
 <body>
 	<div id="welcome">
-		<h1>Siema, witam w grze w wisielca :)</h1>
+		<img alt="logo" src="https://i.imgur.com/xpVvAsF.png">
 		<input id="username" class="form-control" type="text">
 		<button id="connect" class="btn btn-default" type="submit">
-			Connect</button>
+			Play</button>
 	</div>
 
 	<div id="lobby" class="container">
@@ -43,7 +43,7 @@
 
 	<div id="game" class="container">
 		<h1 id="guess"></h1>
-		<h1 id="attempts">${attempts}</h1>
+		<h1 id="attempts"></h1>
 		<div id="letters">
 			<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z"
 				delims="," var="name">
@@ -51,6 +51,13 @@
 					onclick="letterClicked(this.value)" value="${name}">${name}</button>
 			</c:forTokens>
 		</div>
+		<img class="game-progress" id="6" alt="6 attempts" src="https://i.imgur.com/hPIAd0v.jpg">
+		<img class="game-progress" id="5" alt="5 attempts" src="https://i.imgur.com/al7tyZy.jpg">
+		<img class="game-progress" id="4" alt="4 attempts" src="https://i.imgur.com/LQFFoAg.jpg">
+		<img class="game-progress" id="3" alt="3 attempts" src="https://i.imgur.com/65SbgvI.jpg">
+		<img class="game-progress" id="2" alt="2 attempts" src="https://i.imgur.com/VNdvjRS.jpg">
+		<img class="game-progress" id="1" alt="1 attempts" src="https://i.imgur.com/f81kmy8.jpg">
+		<img class="game-progress" id="0" alt="0 attempts" src="https://i.imgur.com/rUN2hyN.jpg">
 		<button id="exit-room" class="btn btn-default" onclick="exitRoom()">
 			Exit room</button>
 	</div>
@@ -59,7 +66,7 @@
 		<input id="word" class="form-control" type="text" autocomplete="off"
 			placeholder="Word to guess...">
 		<button id="setWord" class="btn btn-default" onclick="setWord()">
-			Play</button>
+			Start game</button>
 	</div>
 
 	<div id="player2" class="container">

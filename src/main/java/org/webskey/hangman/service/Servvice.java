@@ -13,14 +13,19 @@ public class Servvice {
 	private Hangman hangman;
 
 	public int getAttempts() {
-		hangman.setAttempts(5);
+		hangman.setAttempts(6);
 		return hangman.getAttempts();
 	}
 	
 	public Hangman setWord(String word) {
 		hangman.setWord(word.toUpperCase());
-		hangman.setGuess(hangman.getWord().chars().mapToObj(c -> "_").collect(Collectors.joining()));
+		setGuess(word);
+		hangman.setAttempts(6);
 		return hangman;
+	}
+	
+	public void setGuess(String word) {
+		hangman.setGuess(word.chars().mapToObj(c -> "_").collect(Collectors.joining()));
 	}
 
 	public Hangman play(String letter) {
