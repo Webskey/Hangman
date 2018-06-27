@@ -50,16 +50,16 @@
 				<button id="${name}" class="btn btn-default letter-button"
 					onclick="letterClicked(this.value)" value="${name}">${name}</button>
 			</c:forTokens>
-		</div>
-		<img class="game-progress" id="6" alt="6 attempts" src="https://i.imgur.com/hPIAd0v.jpg">
-		<img class="game-progress" id="5" alt="5 attempts" src="https://i.imgur.com/al7tyZy.jpg">
-		<img class="game-progress" id="4" alt="4 attempts" src="https://i.imgur.com/LQFFoAg.jpg">
-		<img class="game-progress" id="3" alt="3 attempts" src="https://i.imgur.com/65SbgvI.jpg">
-		<img class="game-progress" id="2" alt="2 attempts" src="https://i.imgur.com/VNdvjRS.jpg">
-		<img class="game-progress" id="1" alt="1 attempts" src="https://i.imgur.com/f81kmy8.jpg">
-		<img class="game-progress" id="0" alt="0 attempts" src="https://i.imgur.com/rUN2hyN.jpg">
+		</div>		
 		<button id="exit-room" class="btn btn-default" onclick="exitRoom()">
 			Exit room</button>
+		<img class="game-progress" id="0-attempts" alt="0 attempts" src="https://i.imgur.com/rUN2hyN.jpg">
+		<img class="game-progress" id="1-attempts" alt="1 attempts" src="https://i.imgur.com/f81kmy8.jpg">
+		<img class="game-progress" id="2-attempts" alt="2 attempts" src="https://i.imgur.com/VNdvjRS.jpg">
+		<img class="game-progress" id="3-attempts" alt="3 attempts" src="https://i.imgur.com/65SbgvI.jpg">
+		<img class="game-progress" id="4-attempts" alt="4 attempts" src="https://i.imgur.com/LQFFoAg.jpg">
+		<img class="game-progress" id="5-attempts" alt="5 attempts" src="https://i.imgur.com/al7tyZy.jpg">
+		<img class="game-progress" id="6-attempts" alt="6 attempts" src="https://i.imgur.com/hPIAd0v.jpg">
 	</div>
 
 	<div id="player1" class="container">

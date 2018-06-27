@@ -16,7 +16,7 @@
 }
 
 .game-progress {
-	position: relative;
+	position: absolute;
 	width: 30%;
 	display: none;
 	margin: auto;

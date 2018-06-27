@@ -1,6 +1,6 @@
 function startGame(){
 	$("#game").show();
-	$("#6").show();
+	$(".game-progress").show();
 	$("#player1").hide();
 	$("#player2").hide();
 }
@@ -38,6 +38,6 @@ function play(letter, guess, attempts) {
 	console.log("Choosen letter : " + letter);	
 	$('#guess').text(guess);
 	$('#attempts').text(attempts);
-	$('.game-progress').hide();
-	$('#' + attempts).show();
+	//$('.game-progress').hide();
+	$('#' + (attempts + 1) + '-attempts').hide();
 }
