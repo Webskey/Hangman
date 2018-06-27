@@ -61,7 +61,7 @@ function checkFull(num){
 		$('#attempts').text(JSON.parse(hangman.body).attempts);
 		startGame();
 	});
-
+	$("#lobby").hide();	
 	$("#loading-gif").show();	
 	setTimeout(function() {
 		console.log("Players : " + players);
@@ -92,7 +92,7 @@ function exitRoom(){
 	room2.unsubscribe();
 	room3.unsubscribe();
 	room4.unsubscribe();
-	$("#game").hide();
+	$("#game-div").hide();
 	$("#lobby").show();
 	$("#player1").hide();
 	$("#player2").hide();
@@ -103,7 +103,8 @@ function player1(){
 	room3.unsubscribe();
 	player = 1;
 	inRoom = true;
-	//$("#lobby").hide();		
+	$("#lobby").hide();		
+	$("#game-div").show();	
 	$("#player1").show();	
 	//$('.letter-button').attr("disabled", true);
 }
@@ -114,7 +115,8 @@ function player2(){
 	inRoom = true;
 	room2.unsubscribe();
 	room3.unsubscribe();
-	//$("#lobby").hide();	
+	$("#lobby").hide();		
+	$("#game-div").show();
 	$("#player2").show();	
 	$('.letter-button').attr("disabled", false);
 }
