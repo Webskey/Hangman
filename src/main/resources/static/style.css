@@ -1,4 +1,5 @@
 #game-div {
+	margin-top:10%;
 	display: none;
 	position: relative;
 	border: 2px solid red;
@@ -7,19 +8,27 @@
 	min-height: 400px;
 }
 
-.lobby{
+.lobby {
+	margin-top:10%;
 	display: none;
 	position: relative;
 	border: 2px solid red;
 	margin: auto;
 	width: 50%;
 	min-height: 400px;
+}
+
+#full-room {
+	postition: absolute;
+	margin-top: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
 }
 
 #exit-room-btn {
 	position: absolute;
 	width: 15%;
-	
 	left: 85%;
 }
 
@@ -27,11 +36,30 @@
 	letter-spacing: 10px;
 }
 
+#online {
+	border: 2px solid orange;
+	position: relavite;
+	width: 25%;
+	margin-left: 25%;
+	display: none;
+	min-height: 200px;
+}
+
 #welcome {
 	position: relative;
 	margin: auto;
-	width: 30%;
-	padding: 5px;
+	width: 70%;
+	padding: 1%;
+	border: 2px solid violet;
+}
+
+#username {
+	margin-top: 5%;
+}
+
+#connect {
+	position: relative;
+	left: 85%;
 }
 
 #letters {
@@ -58,11 +86,13 @@
 	margin: 5px;
 }
 
-/* .btn-room{
-	width:49%;
-    height:50%;
-    font-size:4vw;
-}*/
+.btn-room {
+	margin-top:50px;
+	width: 49.5%;
+	height: 50%;
+	font-size: 4vw;
+}
+
 .container {
 	display: none;
 	position: absolute;

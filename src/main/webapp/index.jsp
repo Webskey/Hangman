@@ -19,8 +19,8 @@
 </head>
 <body>
 	<div id="welcome">
-		<img alt="logo" src="https://i.imgur.com/xpVvAsF.png"> <input
-			id="username" class="form-control" type="text">
+		<img alt="logo" src="http://11points.com/wp-content/uploads/2012/09/dominatehangman-1600.jpg" width='100%'> <input
+			id="username" class="form-control" type="text" placeholder = "Enter your name..." width='100%'><br>
 		<button id="connect" class="btn btn-default" type="submit">
 			Play</button>
 	</div>
@@ -34,19 +34,20 @@
 			onclick="checkFull(3)">ROOM 3</button>
 		<button id="room4" class="btn btn-default btn-room"
 			onclick="checkFull(4)">ROOM 4</button>
+		<img id="full-room" src="http://satunama.org/wp-content/uploads/2017/02/RoomFull.jpg">
 	</div>
 
 	<div id="loading-gif" class="lobby">
 		<img
 			src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
-			width="100%" height="400px">>
+			width="100%" height="400px">
 	</div>
 
 
 	<div id="game-div">
-		<button id="exit-room-btn" class="btn btn-default" onclick="exitRoom()">
-			Exit room</button>
-			
+		<button id="exit-room-btn" class="btn btn-default"
+			onclick="exitRoom()">Exit room</button>
+
 		<div id="game" class="container">
 			<h1 id="guess"></h1>
 			<h1 id="attempts"></h1>
@@ -89,13 +90,14 @@
 			<img
 				src="https://cdn.dribbble.com/users/731566/screenshots/3187347/winner.gif"
 				width="100%" height="90%"> <img
-				src="https://i.imgur.com/d5s6BQ5.png" width="100%" height="10%">
+				src="https://i.imgur.com/hi1rXul.png" width="100%" height="10%">
 		</div>
 		<div id="lost" class="container">
 			<img
 				src="http://gifimage.net/wp-content/uploads/2017/07/game-over-gif-13.gif"
 				width="100%" height="90%"> <img
-				src="https://i.imgur.com/f430VMh.png" width="100%" height="10%">
+				src="https://i.imgur.com/vgbRX77.png" width="100%" height="10%">
 		</div>
 	</div>
+	<div id="online"></div>
 </body>

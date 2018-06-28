@@ -53,8 +53,7 @@ public class Controler {
 
 	@MessageMapping("/room/{num}")
 	@SendTo("/broker/room/{num}")
-	public Hangman room(Hangman hangman) throws Exception {		
-		Thread.sleep(1000); // simulated delay		
+	public Hangman room(Hangman hangman) throws Exception {			
 		return service.play(hangman.getLetter());
 	}
 }

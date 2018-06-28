@@ -16,6 +16,8 @@ function connect() {
 	stompClient.connect({}, function (frame) {
 		setConnected();
 		console.log("Connected to Websocket");
+		$("#online").show();
+		$("#online").append($("#username").val());
 		stompClient.subscribe('/broker/main', function (hangman) {
 			console.log("Got message from main");
 		});
@@ -35,10 +37,13 @@ function checkFull(num){
 
 	room1 = stompClient.subscribe('/broker/room/' + num, function (hangman) {
 		if(JSON.parse(hangman.body).hello === undefined){
-			if(JSON.parse(hangman.body).guess == "win" || JSON.parse(hangman.body).guess == "lost")
+			if(JSON.parse(hangman.body).guess == "win" || JSON.parse(hangman.body).guess == "lost"){
+				$('.letter-button').prop("disabled", true);
+				
 				setTimeout(function() {
 					endGame(JSON.parse(hangman.body).guess);
-				}, 2000);			
+				}, 2000);		
+		}
 				play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
 		}else{
 			console.log("Sending to sayingHello");
@@ -78,6 +83,12 @@ function checku(players){
 		player2();
 	if(players >= 3) {
 		console.log("Room " + room + " is full");
+		$(".btn-room").hide();	
+		$("#full-room").css("display", "block");
+		setTimeout(function() {
+			$(".btn-room").show();
+			$("#full-room").css("display", "none");
+		}, 1500);
 		exitRoom();
 	}
 }
@@ -106,7 +117,7 @@ function player1(){
 	$("#lobby").hide();		
 	$("#game-div").show();	
 	$("#player1").show();	
-	//$('.letter-button').attr("disabled", true);
+	//$('.letter-button').prop("disabled", true);
 }
 
 function player2(){
