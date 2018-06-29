@@ -37,11 +37,11 @@ function checkFull(num){
 
 	room1 = stompClient.subscribe('/broker/room/' + num, function (hangman) {
 		if(JSON.parse(hangman.body).hello === undefined){
-			if(JSON.parse(hangman.body).guess == "win" || JSON.parse(hangman.body).guess == "lost"){
+			if(JSON.parse(hangman.body).guess == JSON.parse(hangman.body).word){
 				$('.letter-button').prop("disabled", true);
 				
 				setTimeout(function() {
-					endGame(JSON.parse(hangman.body).guess);
+					endGame(JSON.parse(hangman.body).attempts);
 				}, 2000);		
 		}
 				play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
@@ -53,6 +53,7 @@ function checkFull(num){
 
 	room2 = stompClient.subscribe('/receiver/room/' + num, function (hangman) {		
 		console.log("Subscribbed room nr: " + room);
+		$("#room-nr-info").text("Room " + room);
 		stompClient.send("/receiver/room/" + num + '/canIjoin', {});	
 	});
 

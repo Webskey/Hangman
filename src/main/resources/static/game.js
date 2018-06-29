@@ -5,10 +5,12 @@ function startGame(){
 	$("#player2").hide();
 }
 
-function endGame(result){
+function endGame(attempts){
 	$("#game").hide();
-	console.log("You " + result);
-	var r = "#" + result;
+	if(attempts > 0)
+	var r = "#win";
+	else
+		var r = "#lost";
 	console.log(r);
 	$(r).show();
 

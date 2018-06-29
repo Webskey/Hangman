@@ -1,5 +1,5 @@
 #game-div {
-	margin-top:10%;
+	margin-top: 10%;
 	display: none;
 	position: relative;
 	border: 2px solid red;
@@ -9,7 +9,7 @@
 }
 
 .lobby {
-	margin-top:10%;
+	margin-top: 10%;
 	display: none;
 	position: relative;
 	border: 2px solid red;
@@ -30,6 +30,13 @@
 	position: absolute;
 	width: 15%;
 	left: 85%;
+}
+
+#room-nr-info {
+	padding: 5%;
+	position: relative;
+	top: 4px;
+	font-size: 1.5vw;
 }
 
 #guess {
@@ -80,14 +87,16 @@
 }
 
 .letter-button {
+	position: relative;
 	padding: 3px;
 	text-align: center;
-	width: 30px;
+	width: 10%;
 	margin: 5px;
+	padding: 3px;
 }
 
 .btn-room {
-	margin-top:50px;
+	margin-top: 50px;
 	width: 49.5%;
 	height: 50%;
 	font-size: 4vw;

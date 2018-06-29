@@ -36,12 +36,12 @@ public class Servvice {
 			hangman.setAttempts(hangman.getAttempts() - 1);						
 		}
 		
-		if(hangman.getWord().equalsIgnoreCase(hangman.getGuess())){
+	/*	if(hangman.getWord().equalsIgnoreCase(hangman.getGuess())){
 			hangman.setGuess("win");
-		}
+		}*/
 		
 		if(hangman.getAttempts() < 1) {
-			hangman.setGuess("lost");
+			hangman.setGuess(hangman.getWord());
 		}
 		return hangman;
 	}

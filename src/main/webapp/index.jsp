@@ -47,12 +47,12 @@
 	<div id="game-div">
 		<button id="exit-room-btn" class="btn btn-default"
 			onclick="exitRoom()">Exit room</button>
-
+<span id = "room-nr-info"> Room nr</span>
 		<div id="game" class="container">
 			<h1 id="guess"></h1>
 			<h1 id="attempts"></h1>
 			<div id="letters">
-				<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,W,Y,X,Z"
+				<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
 					delims="," var="name">
 					<button id="${name}" class="btn btn-default letter-button"
 						onclick="letterClicked(this.value)" value="${name}">${name}</button>
