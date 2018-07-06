@@ -18,23 +18,27 @@
 <meta charset="utf-8">
 </head>
 <body>
+	<button onclick="checkPlayers()">Check Players</button>
 	<div id="welcome">
-		<img alt="logo" src="http://11points.com/wp-content/uploads/2012/09/dominatehangman-1600.jpg" width='100%'> <input
-			id="username" class="form-control" type="text" placeholder = "Enter your name..." width='100%'><br>
+		<img alt="logo"
+			src="http://11points.com/wp-content/uploads/2012/09/dominatehangman-1600.jpg"
+			width='100%'> <input id="username" class="form-control"
+			type="text" placeholder="Enter your name..." width='100%'><br>
 		<button id="connect" class="btn btn-default" type="submit">
 			Play</button>
 	</div>
 
 	<div id="lobby" class="lobby">
 		<button id="room1" class="btn btn-default btn-room"
-			onclick="checkFull(1)">ROOM 1</button>
+			onclick="joinRoom(1)">ROOM 1</button>
 		<button id="room2" class="btn btn-default btn-room"
-			onclick="checkFull(2)">ROOM 2</button>
+			onclick="joinRoom(2)">ROOM 2</button>
 		<button id="room3" class="btn btn-default btn-room"
-			onclick="checkFull(3)">ROOM 3</button>
+			onclick="joinRoom(3)">ROOM 3</button>
 		<button id="room4" class="btn btn-default btn-room"
-			onclick="checkFull(4)">ROOM 4</button>
-		<img id="full-room" src="http://satunama.org/wp-content/uploads/2017/02/RoomFull.jpg">
+			onclick="joinRoom(4)">ROOM 4</button>
+		<img id="full-room"
+			src="http://satunama.org/wp-content/uploads/2017/02/RoomFull.jpg">
 	</div>
 
 	<div id="loading-gif" class="lobby">
@@ -47,12 +51,13 @@
 	<div id="game-div">
 		<button id="exit-room-btn" class="btn btn-default"
 			onclick="exitRoom()">Exit room</button>
-<span id = "room-nr-info"> Room nr</span>
+		<span id="room-nr-info"> Room nr</span>
 		<div id="game" class="container">
 			<h1 id="guess"></h1>
 			<h1 id="attempts"></h1>
 			<div id="letters">
-				<c:forTokens items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
+				<c:forTokens
+					items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
 					delims="," var="name">
 					<button id="${name}" class="btn btn-default letter-button"
 						onclick="letterClicked(this.value)" value="${name}">${name}</button>

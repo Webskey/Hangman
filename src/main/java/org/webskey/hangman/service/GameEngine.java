@@ -7,17 +7,12 @@ import org.springframework.stereotype.Service;
 import org.webskey.hangman.model.Hangman;
 
 @Service
-public class Servvice {
+public class GameEngine {
 
 	@Autowired
 	private Hangman hangman;
-
-	public int getAttempts() {
-		hangman.setAttempts(6);
-		return hangman.getAttempts();
-	}
 	
-	public Hangman setWord(String word) {
+	public Hangman setGame(String word) {
 		hangman.setWord(word.toUpperCase());
 		setGuess(word);
 		hangman.setAttempts(6);
@@ -35,10 +30,6 @@ public class Servvice {
 		} else {
 			hangman.setAttempts(hangman.getAttempts() - 1);						
 		}
-		
-	/*	if(hangman.getWord().equalsIgnoreCase(hangman.getGuess())){
-			hangman.setGuess("win");
-		}*/
 		
 		if(hangman.getAttempts() < 1) {
 			hangman.setGuess(hangman.getWord());

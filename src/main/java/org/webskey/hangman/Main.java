@@ -6,14 +6,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class HangmanApplication extends SpringBootServletInitializer {
+public class Main extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(HangmanApplication.class);
+		return application.sources(Main.class);
 	}
 	
 	public static void main(String[] args) {
-		SpringApplication.run(HangmanApplication.class, args);
+		SpringApplication.run(Main.class, args);
 	}
 }
