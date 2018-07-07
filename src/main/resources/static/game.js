@@ -24,6 +24,7 @@ function endGame(attempts){
 }
 
 function setWord(){
+	startGame();
 	word = $('#word').val();
 	console.log(word);
 	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': word}));

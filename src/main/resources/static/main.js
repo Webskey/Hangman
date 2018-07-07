@@ -1,13 +1,13 @@
 var stompClient = null;
 var room = 0;
-var players = null;
-var inRoom = false;
 var player = null;
 var room1 = 0;
 var room2 = 0;
 var room3 = 0;
 var room4 = 0;
 var word = null;
+var roomStomp = null;
+var userMap = null;
 
 function connect() {
 	var socket = new SockJS('/websocket');
@@ -19,7 +19,7 @@ function connect() {
 
 		stompClient.subscribe('/broker/fill-usermap', function (usermap) {	
 			console.log(usermap);
-
+			userMap = usermap;
 			roomManagment(usermap);
 		});
 		stompClient.subscribe('/broker/create-usermap', function (hangman) {	
@@ -34,77 +34,6 @@ function connect() {
 	});
 }
 
-function checkPlayers(){
-	stompClient.send("/receiver/create-usermap", {});	
-}
-
-function roomManagment(usermap){
-	var usrmap = JSON.parse(usermap.body);
-	console.log(usrmap[0]);
-
-	for (var i = 1; i < 5; i++) {
-		console.log("pokoj " + i + ": " + usrmap[i]);
-		eval('room' + i + '= usrmap[' + i + '];');
-		if(usrmap[i] > 2){
-			$('#room' + i).prop("disabled", true);
-		}else{
-			$('#room' + i).prop("disabled", false);
-		}
-	}
-	/*console.log(usrmap[1]);
-	room1 = usrmap[1];
-	if(usrmap[1] > 2){
-		$('#room1').prop("disabled", true);
-	}else{
-		$('#room1').prop("disabled", false);
-	}
-
-	console.log(usrmap[2]);
-	room2 = usrmap[2];
-	if(usrmap[2] > 2){
-		$('#room2').prop("disabled", true);
-	}else{
-		$('#room2').prop("disabled", false);
-	}
-
-	console.log(usrmap[3]);
-	room3 = usrmap[3];
-	if(usrmap[3] > 2){
-		$('#room3').prop("disabled", true);
-	}else{
-		$('#room3').prop("disabled", false);
-	}
-
-	console.log(usrmap[4]);
-	room4 = usrmap[4];
-	if(usrmap[4] > 2){
-		$('#room4').prop("disabled", true);
-	}else{
-		$('#room4').prop("disabled", false);
-	}*/
-}
-
-function joinRoom(num){
-	room = num;
-	console.log("joining room" + num);
-	stompClient.send("/receiver/create-usermap", {});
-
-	var oki = eval('room' + num);	
-	if(oki == 0){
-		player1();
-	}else{
-		player2();
-	}
-	$("#lobby").hide();	
-
-	//setTimeout(function() {
-	//	console.log("Players : " + players);
-	//	if(!inRoom)
-	//		checku(players);
-	//	$("#loading-gif").hide();
-	//}, 3000);
-}
-
 function setConnected() {	
 	$("#welcome").hide();
 	$("#lobby").show();
@@ -112,94 +41,80 @@ function setConnected() {
 	$("#online").append($("#username").val());
 }
 
-function checkFull(num){
-	room = num;
-	players = 0;
-
-	room1 = stompClient.subscribe('/broker/room/' + num, function (hangman) {
-		if(JSON.parse(hangman.body).hello === undefined){
-			if(JSON.parse(hangman.body).guess == JSON.parse(hangman.body).word){
-				$('.letter-button').prop("disabled", true);
-
-				setTimeout(function() {
-					endGame(JSON.parse(hangman.body).attempts);
-				}, 2000);		
-			}
-			play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
-		}else{
-			console.log("Sending to sayingHello");
-			stompClient.send("/receiver/room/" + num + '/sayingHello', {});
-		}
-	});
-
-	room2 = stompClient.subscribe('/receiver/room/' + num, function (hangman) {		
-		console.log("Subscribbed room nr: " + room);
-		$("#room-nr-info").text("Room " + room);
-		stompClient.send("/receiver/room/" + num + '/canIjoin', {});	
-	});
-
-	room3 = stompClient.subscribe('/broker/room/' + num + "/players", function (hangman) {		
-		players = players + 1;
-		console.log("Added players " + players);
-	});
-
-	room4 = stompClient.subscribe('/broker/room/' + num + "/game", function (hangman) {			
-		$('#guess').text(JSON.parse(hangman.body).guess);
-		$('#attempts').text(JSON.parse(hangman.body).attempts);
-		startGame();
-	});
-	$("#lobby").hide();	
-	$("#loading-gif").show();	
-	setTimeout(function() {
-		console.log("Players : " + players);
-		if(!inRoom)
-			checku(players);
-		$("#loading-gif").hide();
-	}, 3000);
+function checkPlayers(){
+	stompClient.send("/receiver/create-usermap", {});	
 }
 
-function checku(players){
-	if(players == 1)
-		player1();
-	if(players == 2)
-		player2();
-	if(players >= 3) {
-		console.log("Room " + room + " is full");
-		$(".btn-room").hide();	
-		$("#full-room").css("display", "block");
-		setTimeout(function() {
-			$(".btn-room").show();
-			$("#full-room").css("display", "none");
-		}, 1500);
-		exitRoom();
+function roomManagment(usermap){
+	var usrmap = JSON.parse(usermap.body);
+	console.log(usrmap[0].length);
+	for (var i = 1; i < 5; i++) {
+		console.log("pokoj " + i + ": " + usrmap[i].length);
+
+		//checking players activity
+		if(i == room){
+			var numOfPlayers =  eval('room' + i);
+			if(numOfPlayers  == usrmap[i].length){}
+			if(numOfPlayers  > usrmap[i].length){
+				console.log("some1 left");
+			}
+			if(numOfPlayers  < usrmap[i].length){
+				console.log("some1 joined");
+			}
+		}
+		eval('room' + i + '= usrmap[' + i + '].length;');
+
+		if(usrmap[i].length > 2){
+			$('#room' + i).prop("disabled", true);
+		}else{
+			$('#room' + i).prop("disabled", false);
+		}
 	}
+}
+
+function joinRoom(num){
+	room = num;
+	$("#room-nr-info").text('Room nr : ' + room);
+	console.log("joining room" + num);
+	stompClient.send("/receiver/create-usermap", {});
+
+	var playersAmount = eval('room' + num);	
+	if(playersAmount == 0){
+		player1();
+	}else{
+		player2();
+	}
+
+	$("#lobby").hide();	
+
+	roomStomp = stompClient.subscribe('/broker/room/' + num, function (hangman) {
+		if(JSON.parse(hangman.body).guess == JSON.parse(hangman.body).word){
+			$('.letter-button').prop("disabled", true);
+			setTimeout(function() {
+				endGame(JSON.parse(hangman.body).attempts);
+			}, 2000);		
+		}
+		play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
+	});
 }
 
 function exitRoom(){
 	console.log("Leaving room " + room);
 	stompClient.send("/receiver/create-usermap", {});
-	inRoom = false;
 	room = 0;
-	players = 0;
 	player = null;
-	
-	/*room1.unsubscribe();
-	room2.unsubscribe();
-	room3.unsubscribe();
-	room4.unsubscribe();
-	*/
+
+	roomStomp.unsubscribe();
+
 	$("#game-div").hide();
 	$("#lobby").show();
 	$("#player1").hide();
 	$("#player2").hide();
-	
 }
 
 function player1(){
-	//room2.unsubscribe();
-	//room3.unsubscribe();
 	player = 1;
-	inRoom = true;
+	$("#player").text(player);	
 	$("#lobby").hide();		
 	$("#game-div").show();	
 	$("#player1").show();	
@@ -207,11 +122,8 @@ function player1(){
 }
 
 function player2(){
-	console.log("Player2");
 	player = 2;
-	inRoom = true;
-	//room2.unsubscribe();
-	//room3.unsubscribe();
+	$("#player").text(player);
 	$("#lobby").hide();		
 	$("#game-div").show();
 	$("#player2").show();	

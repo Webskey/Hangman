@@ -8,7 +8,11 @@ public class User {
 	private int room;
 	
 	public User() {}
-	public User(String s) {
-		username = s;
+	public User(String username) {
+		this.username = username;
+	}
+	public User(String username, int room) {
+		this.username = username;
+		this.room = room;
 	}
 }

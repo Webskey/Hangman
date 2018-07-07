@@ -103,6 +103,19 @@
 				width="100%" height="90%"> <img
 				src="https://i.imgur.com/vgbRX77.png" width="100%" height="10%">
 		</div>
+		<div id="score">
+			<span id="player"></span><br>
+			<table>
+				<tr>
+					<td id = 'p1-name'></td>
+					<td id = 'p1-score'></td>
+				</tr>
+				<tr>
+					<td id = 'p2-name'></td>
+					<td id = 'p1-score'></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<div id="online"></div>
 </body>
