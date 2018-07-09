@@ -19,7 +19,7 @@ function connect() {
 
 		stompClient.subscribe('/broker/fill-usermap', function (usermap) {	
 			console.log(usermap);
-			userMap = usermap;
+			userMap = JSON.parse(usermap.body);
 			roomManagment(usermap);
 		});
 		stompClient.subscribe('/broker/create-usermap', function (hangman) {	
@@ -70,21 +70,31 @@ function roomManagment(usermap){
 			$('#room' + i).prop("disabled", false);
 		}
 	}
+	
+	var table = "";
+	console.log("lunght" + userMap[room].length);
+	for(var i = 0; i < userMap[room].length; i ++){
+		table += "<tr><td id = 'p" + (i + 1) + "-name'>" + userMap[room][i].username + "</td><td id = 'p" + (i + 1) + "-score'>" + 0 + "</td></tr>";
+	}
+	console.log("TABLEE" + table);
+	$("#score-table").html(table);
 }
 
 function joinRoom(num){
 	room = num;
+		
 	$("#room-nr-info").text('Room nr : ' + room);
 	console.log("joining room" + num);
 	stompClient.send("/receiver/create-usermap", {});
 
-	var playersAmount = eval('room' + num);	
-	if(playersAmount == 0){
+	var playersAmount = eval('room' + num);
+	player1();
+	/*if(playersAmount == 0){
 		player1();
 	}else{
 		player2();
 	}
-
+*/
 	$("#lobby").hide();	
 
 	roomStomp = stompClient.subscribe('/broker/room/' + num, function (hangman) {
@@ -114,7 +124,7 @@ function exitRoom(){
 
 function player1(){
 	player = 1;
-	$("#player").text(player);	
+	$("#player").text("Player nr: " + player);	
 	$("#lobby").hide();		
 	$("#game-div").show();	
 	$("#player1").show();	
@@ -123,7 +133,7 @@ function player1(){
 
 function player2(){
 	player = 2;
-	$("#player").text(player);
+	$("#player").text("Player nr: " + player);
 	$("#lobby").hide();		
 	$("#game-div").show();
 	$("#player2").show();	

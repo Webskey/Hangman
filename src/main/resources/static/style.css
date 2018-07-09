@@ -8,6 +8,13 @@
 	min-height: 400px;
 }
 
+#score-table{
+width: 90%;
+border-collapse: collapse;
+margin-top:20%;
+margin-left:5%;
+}
+
 .lobby {
 	margin-top: 10%;
 	display: none;

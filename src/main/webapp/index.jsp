@@ -105,14 +105,14 @@
 		</div>
 		<div id="score">
 			<span id="player"></span><br>
-			<table>
+			<table id = "score-table">
 				<tr>
-					<td id = 'p1-name'></td>
-					<td id = 'p1-score'></td>
+					<td id = 'p1-name'>P1</td>
+					<td id = 'p1-score'>Score p1</td>
 				</tr>
 				<tr>
-					<td id = 'p2-name'></td>
-					<td id = 'p1-score'></td>
+					<td id = 'p2-name'>P2</td>
+					<td id = 'p2-score'>Score p2</td>
 				</tr>
 			</table>
 		</div>

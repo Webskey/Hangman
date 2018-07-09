@@ -3,7 +3,6 @@ package org.webskey.hangman;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.webskey.hangman.model.Room;
 import org.webskey.hangman.model.User;
 
 public class Test {

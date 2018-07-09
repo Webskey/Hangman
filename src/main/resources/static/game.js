@@ -7,12 +7,17 @@ function startGame(){
 
 function endGame(attempts){
 	$("#game").hide();
-	if(attempts > 0)
-	var r = "#win";
-	else
+	if(attempts > 0){
+		var r = "#win";
+		$('#p1-score').text(parseInt($('#p1-score').text()) + 1);
+	}else{
 		var r = "#lost";
+		$('#p2-score').text(parseInt($('#p2-score').text()) + 1);
+	}
 	console.log(r);
 	$(r).show();
+
+
 
 	setTimeout(function() {
 		$(r).hide();

@@ -52,6 +52,8 @@ public class Controler {
 	@SendTo("/broker/fill-usermap")
 	public Map<Integer, List<User>> fillUserMap(User user) throws Exception {	
 		location.get(user.getRoom()).add(user);
+		User kuser = new User("ZABYTEK", 2);
+		location.get(kuser.getRoom()).add(kuser);
 		return location;
 	}
 }
