@@ -17,14 +17,15 @@ function endGame(attempts){
 	console.log(r);
 	$(r).show();
 
-
-
 	setTimeout(function() {
 		$(r).hide();
-		if(player == 1)
+		if(player == 1){
 			player2();
-		else
+			$('#p1-score').attr('id','p2-score');
+		}else{
 			player1();
+			$('#p2-score').attr('id','p1-score');
+		}	
 	}, 4000);
 }
 

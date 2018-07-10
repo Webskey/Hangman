@@ -27,11 +27,13 @@ public class Test {
 		User user4 = new User("Dyzio", 4);
 		
 		users(user1);
+		
 		users(user2);
 		users(user3);
 		users(user4);
 		System.out.println(location);
-		
+		location.get(user1.getRoom()).remove(user1);
+		System.out.println(location);
 	}
 
 }

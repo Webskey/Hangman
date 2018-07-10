@@ -52,8 +52,23 @@ public class Controler {
 	@SendTo("/broker/fill-usermap")
 	public Map<Integer, List<User>> fillUserMap(User user) throws Exception {	
 		location.get(user.getRoom()).add(user);
-		User kuser = new User("ZABYTEK", 2);
-		location.get(kuser.getRoom()).add(kuser);
+		/*User kuser = new User("ZABYTEK", 2, 1);
+		location.get(kuser.getRoom()).add(kuser);*/
+		return location;
+	}
+	
+	@MessageMapping("/fill-usermap/join")
+	@SendTo("/broker/fill-usermap")
+	public Map<Integer, List<User>> playerJoining(User user) throws Exception {	
+		location.get(user.getPrevRoom()).remove(user);
+		location.get(user.getRoom()).add(user);
+		return location;
+	}
+	
+	@MessageMapping("/fill-usermap/leave")
+	@SendTo("/broker/fill-usermap")
+	public Map<Integer, List<User>> playerLeaving(User user) throws Exception {	
+		location.get(user.getPrevRoom()).remove(user);
 		return location;
 	}
 }
