@@ -11,16 +11,21 @@ public class GameEngine {
 
 	@Autowired
 	private Hangman hangman;
-	
+
 	public Hangman setGame(String word) {
 		hangman.setWord(word.toUpperCase());
 		setGuess(word);
 		hangman.setAttempts(6);
+		hangman.setLetter(null);
 		return hangman;
 	}
-	
+
 	public void setGuess(String word) {
-		hangman.setGuess(word.chars().mapToObj(c -> "_").collect(Collectors.joining()));
+		hangman.setGuess(word.toUpperCase().chars().mapToObj(c -> {
+			if(c < 64 || c > 89)
+				return String.valueOf((char)c);
+			else
+				return "_";}).collect(Collectors.joining()));
 	}
 
 	public Hangman play(String letter) {
@@ -30,7 +35,7 @@ public class GameEngine {
 		} else {
 			hangman.setAttempts(hangman.getAttempts() - 1);						
 		}
-		
+
 		if(hangman.getAttempts() < 1) {
 			hangman.setGuess(hangman.getWord());
 		}

@@ -59,11 +59,13 @@ function roomManagment(usermap){
 				newScoreboard();
 			}
 			if(numOfPlayers  > usrmap[i].length){
-				console.log("some1 left room");
-				$("#game-div").hide();	
+				console.log("some1 left room");	
+				$("#player2").hide();
+				$('#setWord').attr("disabled", true);
+				$("#game").hide();
 				player1();
 			}
-			if(numOfPlayers  < usrmap[i].length){
+			if(numOfPlayers  < usrmap[i].length && usrmap[i].length > 1){
 				console.log("some1 joined room");
 				$('#setWord').attr("disabled", false);
 			}
@@ -82,7 +84,8 @@ function newScoreboard(){
 	var table = "";
 	console.log("lunght" + userMap[room].length);
 	for(var i = 0; i < userMap[room].length; i ++){
-		table += "<tr><td id = 'p" + (i+1) + "-name'>" + userMap[room][i].username + "</td><td id = 'p" + (i+1) + "-score'>" + 0 + "</td></tr>";
+		//table += "<tr><td id = 'p" + (i+1) + "-name'>" + userMap[room][i].username + "</td><td id = 'p" + (i+1) + "-score'>" + 0 + "</td></tr>";
+		table += "<tr id = '" + userMap[room][i].username + "'><td id = 'name'>" + userMap[room][i].username + "</td><td id = 'scores'>" + 0 + "</td></tr>";
 	}
 	console.log("TABLE: " + table);
 	$("#score-table").html(table);
@@ -90,16 +93,17 @@ function newScoreboard(){
 
 function joinRoom(num){
 	console.log("joining room" + num);
-	stompClient.send("/receiver/fill-usermap/join", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
+	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
 	room = num;
-	
+
 	$("#room-nr-info").text('Room nr : ' + room);
-	
+
 	var playersAmount = eval('room' + num);
 	//player1();
 	if(playersAmount == 0){
 		pIndex = 1;
 		player1();
+		//$('#setWord').attr("disabled", true);
 	}else{
 		pIndex = 2
 		player2();
@@ -115,18 +119,22 @@ function joinRoom(num){
 				endGame(JSON.parse(hangman.body).attempts);
 			}, 2000);		
 		}
+		if(JSON.parse(hangman.body).letter == null){
+			startGame();
+		}
 		play(JSON.parse(hangman.body).letter, JSON.parse(hangman.body).guess, JSON.parse(hangman.body).attempts);
 	});
 }
 
 function exitRoom(){
 	console.log("Leaving room " + room);
-	stompClient.send("/receiver/fill-usermap/leave", {}, JSON.stringify({'username': $("#username").val(), 'room': 0, 'prevRoom': room, 'pIndex': pIndex}));
+	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': 0, 'prevRoom': room, 'pIndex': pIndex}));
 	room = 0;
 	player = null;
-	
+
 	roomStomp.unsubscribe();
 
+	$("#game").hide();
 	$("#game-div").hide();
 	$("#lobby").show();
 	$("#player1").hide();
@@ -138,7 +146,7 @@ function player1(){
 	$("#player").text("Player nr: " + player);		
 	$("#player1").show();
 	$('.letter-button').prop("disabled", true);
-	$('#setWord').attr("disabled", true);
+	$("#word").focus();
 }
 
 function player2(){
@@ -149,8 +157,17 @@ function player2(){
 }
 
 $(function () {
-	$("form").on('submit', function (e) {
+	/*$("form").on('submit', function (e) {
 		e.preventDefault();
+	});*/
+	$("#connect").on('submit', function (e) {
+		e.preventDefault();
+		connect();
 	});
-	$( "#connect" ).click(function() { connect(); });
+	$("#setWord").on('submit', function (e) {
+		e.preventDefault();
+		setWord();
+	});
+	//$( "#connect" ).click(function() { connect(); });
+	//$( "#setWord" ).click(function() { setWord(); });
 });

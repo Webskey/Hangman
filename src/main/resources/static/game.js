@@ -1,39 +1,81 @@
 function startGame(){
 	$("#game").show();
 	$(".game-progress").show();
+	$("#letters").show();
 	$("#player1").hide();
 	$("#player2").hide();
 }
 
 function endGame(attempts){
-	$("#game").hide();
+	$("#letters").hide();
+	$(".game-progress").hide();
 	if(attempts > 0){
-		var r = "#win";
-		$('#p1-score').text(parseInt($('#p1-score').text()) + 1);
+		player2win();
 	}else{
-		var r = "#lost";
-		$('#p2-score').text(parseInt($('#p2-score').text()) + 1);
+		player1win();
 	}
-	console.log(r);
-	$(r).show();
 
 	setTimeout(function() {
-		$(r).hide();
+		$("#game").hide();
+		$(".result").hide();
 		if(player == 1){
 			player2();
-			$('#p1-score').attr('id','p2-score');
 		}else{
 			player1();
-			$('#p2-score').attr('id','p1-score');
 		}	
 	}, 4000);
 }
 
+function player1win(){
+	var r = "#lost";
+	if(player == 1){
+		console.log("============= I WON ===========");
+		addPointsMe();
+	}else{
+		addPointsOpp();
+	}
+	console.log(r);
+	$(r).show();
+}
+
+function player2win(){
+	var r = "#win";
+	if(player == 2){
+		console.log("============= I WON ===========");
+		addPointsMe();
+	}else{
+		addPointsOpp();
+	}
+	console.log(r);
+	$(r).show();
+}
+
+function addPointsMe(){
+	$('#score-table tr').each(function(){
+		if($(this).attr('id') == $("#username").val()){
+			$("td", this).each(function(){
+				if($(this).attr('id') == 'scores')
+					$(this).html(parseInt($(this).html()) + 1);
+			});
+		}
+	});
+}
+
+function addPointsOpp(){
+	$('#score-table tr').each(function(){
+		if($(this).attr('id') != $("#username").val()){
+			$("td", this).each(function(){
+				if($(this).attr('id') == 'scores')
+					$(this).html(parseInt($(this).html()) + 1);
+			});
+		}
+	});
+}
+
 function setWord(){
-	startGame();
 	word = $('#word').val();
 	console.log(word);
-	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': word}));
+	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': $('#word').val()}));
 	$('#word').val("");
 }
 

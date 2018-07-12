@@ -18,14 +18,17 @@
 <meta charset="utf-8">
 </head>
 <body>
-	<button onclick="checkPlayers()">Check Players</button>
 	<div id="welcome">
 		<img alt="logo"
 			src="http://11points.com/wp-content/uploads/2012/09/dominatehangman-1600.jpg"
-			width='100%'> <input id="username" class="form-control"
-			type="text" placeholder="Enter your name..." width='100%'><br>
-		<button id="connect" class="btn btn-default" type="submit">
-			Play</button>
+			width='90%'>
+		<form id='connect'>
+			<input id="username" class="form-control" type="text" pattern=".{2,}"
+				title=" 2-15 characters" maxlength="15" autocomplete="off"
+				placeholder="Enter your name..." width='100%' autofocus required><br>
+			<button id="connect-btn" class="btn btn-default" type="submit">
+				Play</button>
+		</form>
 	</div>
 
 	<div id="lobby" class="lobby">
@@ -37,23 +40,15 @@
 			onclick="joinRoom(3)">ROOM 3</button>
 		<button id="room4" class="btn btn-default btn-room"
 			onclick="joinRoom(4)">ROOM 4</button>
-		<img id="full-room"
-			src="http://satunama.org/wp-content/uploads/2017/02/RoomFull.jpg">
 	</div>
-
-	<div id="loading-gif" class="lobby">
-		<img
-			src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
-			width="100%" height="400px">
-	</div>
-
 
 	<div id="game-div">
 		<button id="exit-room-btn" class="btn btn-default"
 			onclick="exitRoom()">Exit room</button>
 		<span id="room-nr-info"> Room nr</span>
+
 		<div id="game" class="container">
-			<h1 id="guess"></h1>
+			<span id="guess"></span>
 			<h1 id="attempts"></h1>
 			<div id="letters">
 				<c:forTokens
@@ -81,23 +76,25 @@
 		</div>
 
 		<div id="player1" class="container">
-			<input id="word" class="form-control" type="text" autocomplete="off"
-				placeholder="Word to guess...">
-			<button id="setWord" class="btn btn-default" onclick="setWord()">
-				Start game</button>
+			<form id="setWord">
+				<input id="word" class="form-control" type="text" autocomplete="off"
+					pattern=".{2,}" title=" 2-15 characters" maxlength="15"
+					placeholder="Word to guess..." required>
+				<button class="btn btn-default" type="submit">Start game</button>
+			</form>
 		</div>
 
 		<div id="player2" class="container">
 			<p>Waiting for other player to come up with the word to guess.</p>
 		</div>
 
-		<div id="win" class="container">
+		<div id="win" class="container result">
 			<img
 				src="https://cdn.dribbble.com/users/731566/screenshots/3187347/winner.gif"
 				width="100%" height="90%"> <img
 				src="https://i.imgur.com/hi1rXul.png" width="100%" height="10%">
 		</div>
-		<div id="lost" class="container">
+		<div id="lost" class="container result">
 			<img
 				src="http://gifimage.net/wp-content/uploads/2017/07/game-over-gif-13.gif"
 				width="100%" height="90%"> <img
@@ -105,14 +102,14 @@
 		</div>
 		<div id="score">
 			<span id="player"></span><br>
-			<table id = "score-table">
+			<table id="score-table">
 				<tr>
-					<td id = 'p1-name'>P1</td>
-					<td id = 'p1-score'>Score p1</td>
+					<td id='p1-name'>P1</td>
+					<td id='p1-score'>Score p1</td>
 				</tr>
 				<tr>
-					<td id = 'p2-name'>P2</td>
-					<td id = 'p2-score'>Score p2</td>
+					<td id='p2-name'>P2</td>
+					<td id='p2-score'>Score p2</td>
 				</tr>
 			</table>
 		</div>

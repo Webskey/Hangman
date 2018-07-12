@@ -2,6 +2,7 @@ package org.webskey.hangman;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import org.webskey.hangman.model.User;
 
@@ -15,25 +16,14 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		 location = new HashMap<>();
-		for(int i = 0; i < 5; i++)
-			location.put(i, new ArrayList<>());
+		String word = "No wy!?[] {}-=!@#$%^&*() Y ork ss ie bile";
+		String newWord = word.toUpperCase().chars().mapToObj(c -> {
+			if(c > 65 && c < 90)
+				return String.valueOf((char)c);
+			else
+				return "_";}).collect(Collectors.joining());
 		
-		System.out.println(location);
-		
-		User user1 = new User("Janek", 2);
-		User user2 = new User("Waldek", 2);
-		User user3 = new User("Rysio", 3);
-		User user4 = new User("Dyzio", 4);
-		
-		users(user1);
-		
-		users(user2);
-		users(user3);
-		users(user4);
-		System.out.println(location);
-		location.get(user1.getRoom()).remove(user1);
-		System.out.println(location);
+		System.out.println(newWord);
 	}
 
 }
