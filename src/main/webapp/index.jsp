@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 <head>
 <title>Hangman</title>
+<link href='https://fonts.googleapis.com/css?family=Chela One'
+	rel='stylesheet'>
 <link rel="shortcut icon" type="image/png"
 	href="https://png.icons8.com/windows/1600/suicide-risk.png" />
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +51,7 @@
 
 		<div id="game" class="container">
 			<span id="guess"></span>
-			<h1 id="attempts"></h1>
+			<h2 id="attempts"></h2>
 			<div id="letters">
 				<c:forTokens
 					items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
@@ -88,18 +90,12 @@
 			<p>Waiting for other player to come up with the word to guess.</p>
 		</div>
 
-		<div id="win" class="container result">
-			<img
-				src="https://cdn.dribbble.com/users/731566/screenshots/3187347/winner.gif"
-				width="100%" height="90%"> <img
-				src="https://i.imgur.com/hi1rXul.png" width="100%" height="10%">
+		<div id="win" class="result">
+			<div id='winner'>winner SCORES!</div>
+			<img id='win-img'
+				src="https://cdn.dribbble.com/users/731566/screenshots/3187347/winner.gif">
 		</div>
-		<div id="lost" class="container result">
-			<img
-				src="http://gifimage.net/wp-content/uploads/2017/07/game-over-gif-13.gif"
-				width="100%" height="90%"> <img
-				src="https://i.imgur.com/vgbRX77.png" width="100%" height="10%">
-		</div>
+
 		<div id="score">
 			<span id="player"></span><br>
 			<table id="score-table">

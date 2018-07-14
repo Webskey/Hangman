@@ -10,9 +10,9 @@ function endGame(attempts){
 	$("#letters").hide();
 	$(".game-progress").hide();
 	if(attempts > 0){
-		player2win();
+		won(2);
 	}else{
-		player1win();
+		won(1);
 	}
 
 	setTimeout(function() {
@@ -26,47 +26,23 @@ function endGame(attempts){
 	}, 4000);
 }
 
-function player1win(){
-	var r = "#lost";
-	if(player == 1){
+function won(winner){
+	if(player == winner)
 		console.log("============= I WON ===========");
-		addPointsMe();
-	}else{
-		addPointsOpp();
-	}
-	console.log(r);
-	$(r).show();
+	
+	addPoints(player == winner);
+	$('#win').show();
 }
 
-function player2win(){
-	var r = "#win";
-	if(player == 2){
-		console.log("============= I WON ===========");
-		addPointsMe();
-	}else{
-		addPointsOpp();
-	}
-	console.log(r);
-	$(r).show();
-}
-
-function addPointsMe(){
+function addPoints(amIWinner){
 	$('#score-table tr').each(function(){
-		if($(this).attr('id') == $("#username").val()){
+		var myRow = $(this).attr('id') == $("#username").val();
+		if(myRow == amIWinner){
 			$("td", this).each(function(){
 				if($(this).attr('id') == 'scores')
 					$(this).html(parseInt($(this).html()) + 1);
-			});
-		}
-	});
-}
-
-function addPointsOpp(){
-	$('#score-table tr').each(function(){
-		if($(this).attr('id') != $("#username").val()){
-			$("td", this).each(function(){
-				if($(this).attr('id') == 'scores')
-					$(this).html(parseInt($(this).html()) + 1);
+				else
+					$('#winner').html($(this).html() + ' SCORES!');
 			});
 		}
 	});

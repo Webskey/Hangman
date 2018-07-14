@@ -22,7 +22,7 @@ public class GameEngine {
 
 	public void setGuess(String word) {
 		hangman.setGuess(word.toUpperCase().chars().mapToObj(c -> {
-			if(c < 64 || c > 89)
+			if(c < 64 || c > 88)
 				return String.valueOf((char)c);
 			else
 				return "_";}).collect(Collectors.joining()));
