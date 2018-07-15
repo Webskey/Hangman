@@ -77,7 +77,9 @@
 				src="https://i.imgur.com/JXWiWE4.jpg">
 		</div>
 
-		<div id="player1" class="container">
+		<div id="player1" class="player">
+			When two players are in this room you can set a word and start the
+			game.
 			<form id="setWord">
 				<input id="word" class="form-control" type="text" autocomplete="off"
 					pattern=".{2,}" title=" 2-15 characters" maxlength="15"
@@ -86,7 +88,7 @@
 			</form>
 		</div>
 
-		<div id="player2" class="container">
+		<div id="player2" class="player">
 			<p>Waiting for other player to come up with the word to guess.</p>
 		</div>
 

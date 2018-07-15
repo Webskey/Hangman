@@ -12,7 +12,7 @@
 	display: none;
 	position: relative;
 	border: 1px solid #c0c0c0;
-	background-color: #d8d8d8;
+	background-color: #f3f3f3;
 	margin: auto;
 	width: 50%;
 	min-width: 500px;
@@ -56,7 +56,7 @@
 #guess {
 	position: relative;
 	top: 10px;
-	font-size: 25px;
+	font-size: 20px;
 	letter-spacing: 10px;
 	/*border: 2px solid orange;*/
 }
@@ -92,7 +92,7 @@
 	width: 47%;
 	padding: 10px;
 	margin: 2%;
-	border: 2px solid pink;
+	/*border: 2px solid pink;*/
 }
 
 .game-progress {
@@ -131,7 +131,7 @@
 	width: 80%;
 	height: 90%;
 	margin: auto;
-	/*border: 2px solid green;*/
+	border: 2px solid green;
 }
 
 .result {
@@ -146,10 +146,9 @@
 }
 
 #win-img {
-	position: absolute;
+	position: relative;
 	/*border: 2px solid purple;*/
-	top: 20%;
-	width: 100%;
+	left: calc(50% - 140px);
 	height: 75%;
 }
 
@@ -161,4 +160,15 @@
 	text-align: center;
 	font-size: 30px;
 	font-family: 'Chela One';
+}
+
+.player {
+	display: none;
+	/*border: 2px solid orange;*/
+	position: absolute;
+	font-size: 30px;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	text-align: center;
 }
