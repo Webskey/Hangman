@@ -142,8 +142,7 @@ function exitRoom(){
 }
 
 function player1(){
-	player = 1;
-	$("#player").text("Player nr: " + player);		
+	player = 1;	
 	$("#player1").show();
 	$('.letter-button').prop("disabled", true);
 	$("#word").focus();
@@ -151,7 +150,6 @@ function player1(){
 
 function player2(){
 	player = 2;
-	$("#player").text("Player nr: " + player);
 	$("#player2").show();	
 	$('.letter-button').attr("disabled", false);
 }

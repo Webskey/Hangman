@@ -12,6 +12,8 @@
 	href="https://png.icons8.com/windows/1600/suicide-risk.png" />
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/style.css" rel="stylesheet">
+<link href="/lobby.css" rel="stylesheet">
+<link href="/scoreboard.css" rel="stylesheet">
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -51,7 +53,7 @@
 
 		<div id="game" class="container">
 			<span id="guess"></span>
-			<h2 id="attempts"></h2>
+			<span id="attempts"></span>
 			<div id="letters">
 				<c:forTokens
 					items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
@@ -99,15 +101,15 @@
 		</div>
 
 		<div id="score">
-			<span id="player"></span><br>
+			<span id='scoreboard-info'>Scoreboard</span>
 			<table id="score-table">
 				<tr>
-					<td id='p1-name'>P1</td>
-					<td id='p1-score'>Score p1</td>
+					<td id='name'></td>
+					<td id='scores'></td>
 				</tr>
 				<tr>
-					<td id='p2-name'>P2</td>
-					<td id='p2-score'>Score p2</td>
+					<td id='name'></td>
+					<td id='scores'></td>
 				</tr>
 			</table>
 		</div>

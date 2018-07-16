@@ -64,7 +64,7 @@ function letterClicked(value) {
 function play(letter, guess, attempts) {	
 	console.log("Choosen letter : " + letter);	
 	$('#guess').text(guess);
-	$('#attempts').text(attempts);
+	$('#attempts').text("Attempts: " + attempts);
 	//$('.game-progress').hide();
 	$('#' + (attempts + 1) + '-attempts').hide();
 }
