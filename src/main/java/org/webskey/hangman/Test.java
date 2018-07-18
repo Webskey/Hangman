@@ -16,9 +16,9 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		String word = "No wy!?[] {}-=!@#$%^&*() Y ork ss ie bile";
+		String word = "abcdefghijklmnoprstuqwxyz   No wy!?[] {}-=!@#$%^&*() Y ork ss ie bile";
 		String newWord = word.toUpperCase().chars().mapToObj(c -> {
-			if(c > 65 && c < 90)
+			if(c < 64 || c > 90)
 				return String.valueOf((char)c);
 			else
 				return "_";}).collect(Collectors.joining());

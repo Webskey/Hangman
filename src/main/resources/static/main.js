@@ -19,12 +19,12 @@ function connect() {
 		console.log("Connected to Websocket");
 
 		stompClient.subscribe('/broker/fill-usermap', function (usermap) {	
-			console.log(usermap);
+			/*console.log(usermap);*/
 			userMap = JSON.parse(usermap.body);
 			roomManagment(usermap);
 		});
 		stompClient.subscribe('/broker/create-usermap', function (hangman) {	
-			console.log("Sending info about me: " + $("#username").val() + " room: " + room);
+			/*console.log("Sending info about me: " + $("#username").val() + " room: " + room);*/
 			stompClient.send("/receiver/fill-usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': room, 'pIndex': pIndex}));	
 		});
 
@@ -38,8 +38,7 @@ function connect() {
 function setConnected() {	
 	$("#welcome").hide();
 	$("#lobby").show();
-	$("#online").show();
-	$("#online").append($("#username").val());
+	connectChat($("#username").val());
 }
 
 function checkPlayers(){
@@ -48,9 +47,9 @@ function checkPlayers(){
 
 function roomManagment(usermap){
 	var usrmap = JSON.parse(usermap.body);
-	console.log(usrmap[0].length);
+	/*console.log(usrmap[0].length);*/
 	for (var i = 1; i < 5; i++) {
-		console.log("pokoj " + i + ": " + usrmap[i].length);
+		/*console.log("pokoj " + i + ": " + usrmap[i].length);*/
 
 		//checking players activity
 		if(i == room){

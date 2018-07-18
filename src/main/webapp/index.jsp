@@ -11,14 +11,15 @@
 <link rel="shortcut icon" type="image/png"
 	href="https://png.icons8.com/windows/1600/suicide-risk.png" />
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/style.css" rel="stylesheet">
-<link href="/lobby.css" rel="stylesheet">
-<link href="/scoreboard.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/lobby.css" rel="stylesheet">
+<link href="/css/scoreboard.css" rel="stylesheet">
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <script src="/main.js"></script>
 <script src="/game.js"></script>
+<script src="/chat.js"></script>
 <meta charset="utf-8">
 </head>
 <body>
@@ -114,5 +115,6 @@
 			</table>
 		</div>
 	</div>
-	<div id="online"></div>
+	
+	<iframe id='chat' src="https://webskey-websocket-chat.herokuapp.com/"> </iframe>
 </body>

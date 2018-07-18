@@ -1,0 +1,19 @@
+.lobby {
+	top: 10px;
+	display: none;
+	position: relative;
+	/*border: 2px solid red;*/
+	margin: auto;
+	width: 50%;
+	min-width: 500px;
+	min-height: 400px;
+	background-color: #f3f3f3;
+	border: 1px solid #c0c0c0;
+}
+
+.btn-room {
+	margin-top: 70px;
+    margin-left:0.5%;
+	width: 49%;
+	font-size: 40px;
+}
