@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Chela One'
 	rel='stylesheet'>
 <link rel="shortcut icon" type="image/png"
-	href="https://png.icons8.com/windows/1600/suicide-risk.png" />
+	href="https://image.flaticon.com/icons/png/128/514/514163.png" />
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
 <link href="/css/lobby.css" rel="stylesheet">
@@ -53,8 +53,7 @@
 		<span id="room-nr-info"> Room nr</span>
 
 		<div id="game" class="container">
-			<span id="guess"></span>
-			<span id="attempts"></span>
+			<span id="guess"></span> <span id="attempts"></span>
 			<div id="letters">
 				<c:forTokens
 					items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
@@ -114,7 +113,11 @@
 				</tr>
 			</table>
 		</div>
+
+		<div id='chat-div'>
+			<span id='chat-info'>Room chat</span>
+			<iframe id='chat' src="https://webskey-websocket-chat.herokuapp.com/">
+			</iframe>
+		</div>
 	</div>
-	
-	<iframe id='chat' src="https://webskey-websocket-chat.herokuapp.com/"> </iframe>
 </body>

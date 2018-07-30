@@ -52,16 +52,23 @@
 	/*border: 2px solid orange;*/
 }
 
-#chat {
-	border: 2px solid orange;
+#chat-div {
+	/*border: 2px solid orange;*/
 	width: 50%;
 	display: none;
 	min-height: 300px;
-	min-width: 250px;
-	top: 10px;
-	position: relative;
-	left: calc(50% - 250px);
+	top: 398px;
+	position: absolute;
+	left: 0px;
 	/*margin-left:25%;*/
+}
+
+#chat {
+	height: 250px;
+	top: 70px;
+	border: none;
+	position: relative;
+	width: 100%;
 }
 
 #username {
@@ -147,4 +154,12 @@
 	left: 10%;
 	width: 80%;
 	text-align: center;
+}
+
+#chat-info {
+	position: absolute;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+	top: 5%;
 }

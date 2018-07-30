@@ -38,7 +38,6 @@ function connect() {
 function setConnected() {	
 	$("#welcome").hide();
 	$("#lobby").show();
-	connectChat($("#username").val());
 }
 
 function checkPlayers(){
@@ -95,6 +94,8 @@ function joinRoom(num){
 	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
 	room = num;
 
+	connectChat($("#username").val());
+	
 	$("#room-nr-info").text('Room nr : ' + room);
 
 	var playersAmount = eval('room' + num);
