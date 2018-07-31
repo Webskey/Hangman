@@ -19,12 +19,10 @@ function connect() {
 		console.log("Connected to Websocket");
 
 		stompClient.subscribe('/broker/fill-usermap', function (usermap) {	
-			/*console.log(usermap);*/
 			userMap = JSON.parse(usermap.body);
 			roomManagment(usermap);
 		});
 		stompClient.subscribe('/broker/create-usermap', function (hangman) {	
-			/*console.log("Sending info about me: " + $("#username").val() + " room: " + room);*/
 			stompClient.send("/receiver/fill-usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': room, 'pIndex': pIndex}));	
 		});
 
@@ -46,27 +44,28 @@ function checkPlayers(){
 
 function roomManagment(usermap){
 	var usrmap = JSON.parse(usermap.body);
-	/*console.log(usrmap[0].length);*/
-	for (var i = 1; i < 5; i++) {
-		/*console.log("pokoj " + i + ": " + usrmap[i].length);*/
 
-		//checking players activity
+	for (var i = 1; i < 5; i++) {
 		if(i == room){
 			var numOfPlayers =  eval('room' + i);
-			if(numOfPlayers  != usrmap[i].length){
+
+			if(numOfPlayers  != usrmap[i].length)
 				newScoreboard();
-			}
-			if(numOfPlayers  > usrmap[i].length){
-				console.log("some1 left room");	
+
+			if(numOfPlayers > usrmap[i].length){
+				alert("Player left room.");
 				$("#player2").hide();
-				$('#setWord').attr("disabled", true);
+				$('#setWord-btn').attr("disabled", true);
 				$("#game").hide();
 				player1();
+				pIndex = 1;
 			}
-			if(numOfPlayers  < usrmap[i].length && usrmap[i].length > 1){
-				console.log("some1 joined room");
-				$('#setWord').attr("disabled", false);
-			}
+
+			if(numOfPlayers < usrmap[i].length && usrmap[i].length > 1)
+				$('#setWord-btn').attr("disabled", false);
+
+			if(numOfPlayers < usrmap[i].length && usrmap[i].length > 1 && pIndex == 1)
+				alert("New player joined this room.");
 		}
 		eval('room' + i + '= usrmap[' + i + '].length;');
 
@@ -80,30 +79,26 @@ function roomManagment(usermap){
 
 function newScoreboard(){
 	var table = "";
-	console.log("lunght" + userMap[room].length);
-	for(var i = 0; i < userMap[room].length; i ++){
-		//table += "<tr><td id = 'p" + (i+1) + "-name'>" + userMap[room][i].username + "</td><td id = 'p" + (i+1) + "-score'>" + 0 + "</td></tr>";
+
+	for(var i = 0; i < userMap[room].length; i ++)
 		table += "<tr id = '" + userMap[room][i].username + "'><td id = 'name'>" + userMap[room][i].username + "</td><td id = 'scores'>" + 0 + "</td></tr>";
-	}
-	console.log("TABLE: " + table);
+
 	$("#score-table").html(table);
 }
 
 function joinRoom(num){
-	console.log("joining room" + num);
 	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
 	room = num;
 
 	connectChat($("#username").val());
-	
+
 	$("#room-nr-info").text('Room nr : ' + room);
 
 	var playersAmount = eval('room' + num);
-	//player1();
 	if(playersAmount == 0){
 		pIndex = 1;
 		player1();
-		//$('#setWord').attr("disabled", true);
+		$('#setWord-btn').attr("disabled", true);
 	}else{
 		pIndex = 2
 		player2();
@@ -155,9 +150,6 @@ function player2(){
 }
 
 $(function () {
-	/*$("form").on('submit', function (e) {
-		e.preventDefault();
-	});*/
 	$("#connect").on('submit', function (e) {
 		e.preventDefault();
 		connect();
@@ -166,6 +158,4 @@ $(function () {
 		e.preventDefault();
 		setWord();
 	});
-	//$( "#connect" ).click(function() { connect(); });
-	//$( "#setWord" ).click(function() { setWord(); });
 });

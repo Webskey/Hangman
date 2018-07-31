@@ -86,7 +86,7 @@
 				<input id="word" class="form-control" type="text" autocomplete="off"
 					pattern=".{2,}" title=" 2-15 characters" maxlength="15"
 					placeholder="Word to guess..." required>
-				<button class="btn btn-default" type="submit">Start game</button>
+				<button id="setWord-btn" class="btn btn-default" type="submit">Start game</button>
 			</form>
 		</div>
 

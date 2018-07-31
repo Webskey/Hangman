@@ -28,7 +28,6 @@ function endGame(attempts){
 
 function won(winner){
 	if(player == winner)
-		console.log("============= I WON ===========");
 	
 	addPoints(player == winner);
 	$('#win').show();
