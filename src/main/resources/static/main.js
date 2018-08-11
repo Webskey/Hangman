@@ -18,16 +18,12 @@ function connect() {
 		setConnected();
 		console.log("Connected to Websocket");
 
-		stompClient.subscribe('/broker/fill-usermap', function (usermap) {	
+		stompClient.subscribe('/broker/usermap', function (usermap) {	
 			userMap = JSON.parse(usermap.body);
 			roomManagment(usermap);
 		});
-		stompClient.subscribe('/broker/create-usermap', function (hangman) {	
-			stompClient.send("/receiver/fill-usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': room, 'pIndex': pIndex}));	
-		});
-
-		stompClient.send("/receiver/create-usermap", {});	
-
+		
+		stompClient.send("/receiver/usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': room, 'pIndex': pIndex}));	
 	},function(message) {
 		console.log("Disconnected from WebSocket");
 	});
@@ -36,10 +32,6 @@ function connect() {
 function setConnected() {	
 	$("#welcome").hide();
 	$("#lobby").show();
-}
-
-function checkPlayers(){
-	stompClient.send("/receiver/create-usermap", {});	
 }
 
 function roomManagment(usermap){
@@ -87,7 +79,7 @@ function newScoreboard(){
 }
 
 function joinRoom(num){
-	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
+	stompClient.send("/receiver/usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': num, 'prevRoom': room, 'pIndex': pIndex}));
 	room = num;
 
 	connectChat($("#username").val());
@@ -123,7 +115,7 @@ function joinRoom(num){
 
 function exitRoom(){
 	console.log("Leaving room " + room);
-	stompClient.send("/receiver/fill-usermap/changeRoom", {}, JSON.stringify({'username': $("#username").val(), 'room': 0, 'prevRoom': room, 'pIndex': pIndex}));
+	stompClient.send("/receiver/usermap", {}, JSON.stringify({'username': $("#username").val(), 'room': 0, 'prevRoom': room, 'pIndex': pIndex}));
 	room = 0;
 	player = null;
 

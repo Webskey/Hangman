@@ -12,7 +12,7 @@ public class Main extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Main.class);
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}

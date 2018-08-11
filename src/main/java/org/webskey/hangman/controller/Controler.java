@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,6 +25,9 @@ public class Controler {
 
 	@RequestMapping("/")
 	public String index() {
+		location = new HashMap<>();
+		for(int i = 0; i < 5; i++)
+			location.put(i, new ArrayList<>());
 		return "index";
 	}
 
@@ -39,28 +43,10 @@ public class Controler {
 		return gameService.play(hangman.getLetter());
 	}
 
-	@MessageMapping("/create-usermap")
-	@SendTo("/broker/create-usermap")
-	public Map<Integer, List<User>> createUserMap() throws Exception {	
-		location = new HashMap<>();
-		for(int i = 0; i < 5; i++)
-			location.put(i, new ArrayList<>());
-		return location;
-	}
-
-	@MessageMapping("/fill-usermap")
-	@SendTo("/broker/fill-usermap")
-	public Map<Integer, List<User>> fillUserMap(User user) throws Exception {	
-		location.get(user.getRoom()).add(user);
-		/*User kuser = new User("ZABYTEK", 2, 1);
-		location.get(kuser.getRoom()).add(kuser);*/
-		return location;
-	}
-
-	@MessageMapping("/fill-usermap/changeRoom")
-	@SendTo("/broker/fill-usermap")
-	public Map<Integer, List<User>> changeRoom(User user) throws Exception {	
-		location.get(user.getPrevRoom()).remove(user);
+	@MessageMapping("/usermap")
+	@SendTo("/broker/usermap")
+	public Map<Integer, List<User>> userMap(User user) throws Exception {	
+		Optional.ofNullable(user.getPrevRoom()).ifPresent(x -> location.get(x).remove(user));
 		location.get(user.getRoom()).add(user);
 		return location;
 	}
