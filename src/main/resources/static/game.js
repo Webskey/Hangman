@@ -1,5 +1,5 @@
 function startGame(){
-	$("#game").show();
+	$("#game-div").show();
 	$(".game-progress").show();
 	$("#letters").show();
 	$("#player1").hide();
@@ -16,8 +16,8 @@ function endGame(attempts){
 	}
 
 	setTimeout(function() {
-		$("#game").hide();
-		$(".result").hide();
+		$("#game-div").hide();
+		$("#result").hide();
 		if(player == 1){
 			player2();
 		}else{
@@ -30,7 +30,7 @@ function won(winner){
 	if(player == winner)
 	
 	addPoints(player == winner);
-	$('#win').show();
+	$('#result').show();
 }
 
 function addPoints(amIWinner){

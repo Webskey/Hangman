@@ -1,18 +1,17 @@
-#score {
-	top: 398px;
-	/*border: 2px solid blue;*/
-	position: absolute;
+#scoreboard-div {
 	width: 50%;
-	margin-left: 50%;
 	height: 200px;
+	position: absolute;
+	top: 398px;
+	left: 50%;
 }
 
 #scoreboard-info {
-	position: absolute;
 	width: 100%;
+	position: absolute;
+	top: 5%;
 	font-size: 30px;
 	text-align: center;
-	top: 5%;
 }
 
 #score-table {
@@ -20,11 +19,9 @@
 	border-collapse: collapse;
 	margin-top: 25%;
 	margin-left: 5%;
-	/*border: 2px solid red;*/
 }
 
 #score-table td {
-	/*border: 2px solid green;*/
 	padding-bottom: 10px;
 }
 

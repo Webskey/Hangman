@@ -3,8 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
+<meta charset="utf-8">
 <title>Hangman</title>
 <link href='https://fonts.googleapis.com/css?family=Chela One'
 	rel='stylesheet'>
@@ -13,6 +13,7 @@
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
 <link href="/css/lobby.css" rel="stylesheet">
+<link href="/css/chat.css" rel="stylesheet">
 <link href="/css/scoreboard.css" rel="stylesheet">
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
@@ -20,14 +21,14 @@
 <script src="/main.js"></script>
 <script src="/game.js"></script>
 <script src="/chat.js"></script>
-<meta charset="utf-8">
 </head>
+
 <body>
-	<div id="welcome">
-		<img alt="logo"
+	<div id="welcome-div">
+		<img alt="logo-img"
 			src="http://11points.com/wp-content/uploads/2012/09/dominatehangman-1600.jpg"
 			width='90%'>
-		<form id='connect'>
+		<form id='connect-form'>
 			<input id="username" class="form-control" type="text" pattern=".{2,}"
 				title=" 2-15 characters" maxlength="15" autocomplete="off"
 				placeholder="Enter your name..." width='100%' autofocus required><br>
@@ -36,7 +37,7 @@
 		</form>
 	</div>
 
-	<div id="lobby" class="lobby">
+	<div id="lobby-div" class="lobby">
 		<button id="room1" class="btn btn-default btn-room"
 			onclick="joinRoom(1)">ROOM 1</button>
 		<button id="room2" class="btn btn-default btn-room"
@@ -47,12 +48,12 @@
 			onclick="joinRoom(4)">ROOM 4</button>
 	</div>
 
-	<div id="game-div">
+	<div id="room-div" class="lobby">
 		<button id="exit-room-btn" class="btn btn-default"
 			onclick="exitRoom()">Exit room</button>
 		<span id="room-nr-info"> Room nr</span>
 
-		<div id="game" class="container">
+		<div id="game-div">
 			<span id="guess"></span> <span id="attempts"></span>
 			<div id="letters">
 				<c:forTokens
@@ -80,13 +81,14 @@
 		</div>
 
 		<div id="player1" class="player">
-			When two players are in this room you can set a word and start the
-			game.
+			<p>When two players are in this room you can set a word and start
+				the game.</p>
 			<form id="setWord">
 				<input id="word" class="form-control" type="text" autocomplete="off"
 					pattern=".{2,}" title=" 2-15 characters" maxlength="15"
 					placeholder="Word to guess..." required>
-				<button id="setWord-btn" class="btn btn-default" type="submit">Start game</button>
+				<button id="setWord-btn" class="btn btn-default" type="submit">Start
+					game</button>
 			</form>
 		</div>
 
@@ -94,13 +96,13 @@
 			<p>Waiting for other player to come up with the word to guess.</p>
 		</div>
 
-		<div id="win" class="result">
+		<div id="result">
 			<div id='winner'>winner SCORES!</div>
 			<img id='win-img'
 				src="https://cdn.dribbble.com/users/731566/screenshots/3187347/winner.gif">
 		</div>
 
-		<div id="score">
+		<div id="scoreboard-div">
 			<span id='scoreboard-info'>Scoreboard</span>
 			<table id="score-table">
 				<tr>

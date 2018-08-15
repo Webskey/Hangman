@@ -30,8 +30,8 @@ function connect() {
 }
 
 function setConnected() {	
-	$("#welcome").hide();
-	$("#lobby").show();
+	$("#welcome-div").hide();
+	$("#lobby-div").show();
 }
 
 function roomManagment(usermap){
@@ -96,8 +96,8 @@ function joinRoom(num){
 		player2();
 	}
 
-	$("#lobby").hide();	
-	$("#game-div").show();
+	$("#lobby-div").hide();	
+	$("#room-div").show();
 
 	roomStomp = stompClient.subscribe('/broker/room/' + num, function (hangman) {
 		if(JSON.parse(hangman.body).guess == JSON.parse(hangman.body).word){
@@ -121,9 +121,9 @@ function exitRoom(){
 
 	roomStomp.unsubscribe();
 
-	$("#game").hide();
 	$("#game-div").hide();
-	$("#lobby").show();
+	$("#room-div").hide();
+	$("#lobby-div").show();
 	$("#player1").hide();
 	$("#player2").hide();
 }
@@ -142,7 +142,7 @@ function player2(){
 }
 
 $(function () {
-	$("#connect").on('submit', function (e) {
+	$("#connect-form").on('submit', function (e) {
 		e.preventDefault();
 		connect();
 	});

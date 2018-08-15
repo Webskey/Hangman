@@ -12,11 +12,14 @@ public class GameEngine {
 	@Autowired
 	private Hangman hangman;
 
-	public Hangman setGame(String word) {
+	public void setGame(String word) {
 		hangman.setWord(word.toUpperCase());
-		setGuess(word);
 		hangman.setAttempts(6);
 		hangman.setLetter(null);
+		setGuess(word);
+	}
+	
+	public Hangman getHangman() {
 		return hangman;
 	}
 
@@ -25,28 +28,27 @@ public class GameEngine {
 			if(c < 64 || c > 90)
 				return String.valueOf((char)c);
 			else
-				return "_";}).collect(Collectors.joining()));
+				return "_";
+		}).collect(Collectors.joining()));
 	}
 
-	public Hangman play(String letter) {
+	public void play(String letter) {
 		hangman.setLetter(letter);
-		if(hangman.getWord().contains(letter)) {
-			hangman.setGuess(replace(hangman.getWord(), hangman.getGuess(), letter));		
-		} else {
-			hangman.setAttempts(hangman.getAttempts() - 1);						
-		}
 
-		if(hangman.getAttempts() < 1) {
+		if(hangman.getWord().contains(letter))
+			hangman.setGuess(replace(hangman.getWord(), hangman.getGuess(), letter));		
+		else 
+			hangman.setAttempts(hangman.getAttempts() - 1);						
+
+		if(hangman.getAttempts() < 1) 
 			hangman.setGuess(hangman.getWord());
-		}
-		return hangman;
 	}
 
 	public String replace(String word, String guess, String letter) {			
-		StringBuilder sb = new StringBuilder(guess);		
+		StringBuilder guessStringBuilder = new StringBuilder(guess);		
 		for(int i = 0; i < word.length(); i++)
 			if(String.valueOf(word.charAt(i)).equalsIgnoreCase(letter))
-				sb.setCharAt(i, word.charAt(i));
-		return sb.toString();
+				guessStringBuilder.setCharAt(i, word.charAt(i));
+		return guessStringBuilder.toString();
 	}
 }

@@ -1,74 +1,9 @@
-#welcome {
-	position: relative;
-	margin: auto;
+#welcome-div {
 	width: 70%;
 	min-width: 500px;
-	padding: 1%;
-	/*border: 2px solid violet;*/
-}
-
-#game-div {
-	top: 10px;
-	display: none;
 	position: relative;
-	border: 1px solid #c0c0c0;
-	background-color: #f3f3f3;
 	margin: auto;
-	width: 50%;
-	min-width: 500px;
-	min-height: 400px;
-}
-
-#exit-room-btn {
-	position: absolute;
-	width: 15%;
-	min-width: 50px;
-	left: 85%;
-}
-
-#room-nr-info {
-	padding: 5%;
-	position: relative;
-	top: 4px;
-	font-size: calc(12px + 1.2vw);
-}
-
-#guess {
-	position: absolute;
-	width: 100%;
-	top: 10px;
-	font-size: 20px;
-	letter-spacing: 10px;
-	/*border: 2px solid orange;*/
-	text-align: center;
-}
-
-#attempts {
-	position: relative;
-	font-size: 20px;
-	left: 10%;
-	top: 50px;
-	bottom: 300px;
-	/*border: 2px solid orange;*/
-}
-
-#chat-div {
-	/*border: 2px solid orange;*/
-	width: 50%;
-	display: none;
-	min-height: 300px;
-	top: 398px;
-	position: absolute;
-	left: 0px;
-	/*margin-left:25%;*/
-}
-
-#chat {
-	height: 250px;
-	top: 70px;
-	border: none;
-	position: relative;
-	width: 100%;
+	padding: 1%;
 }
 
 #username {
@@ -80,66 +15,78 @@
 	left: 90%;
 }
 
+#guess {
+	width: 100%;
+	position: absolute;
+	top: 10px;
+	font-size: 20px;
+	letter-spacing: 10px;
+	text-align: center;
+}
+
+#attempts {
+	position: relative;
+	left: 10%;
+	top: 50px;
+	bottom: 300px;
+	font-size: 20px;
+}
+
 #letters {
-	margin-top: 60px;
 	width: 47%;
+	margin-top: 60px;
 	padding: 10px;
-	/*border: 2px solid pink;*/
+}
+
+.letter-button {
+	width: 10%;
+	position: relative;
+	margin: 5px;
+	padding: 3px;
+	text-align: center;
 }
 
 .game-progress {
-	border: 1px solid #c0c0c0;
 	display: none;
+	width: 47%;
+	height: 80%;
 	position: absolute;
 	top: 15%;
 	left: 50%;
 	margin: 2%;
-	width: 47%;
-	height: 80%;
+	border: 1px solid #c0c0c0;
 }
 
-.letter-button {
-	position: relative;
-	text-align: center;
-	width: 10%;
-	margin: 5px;
-	padding: 3px;
-}
-
-.container {
+.game-div {
 	display: none;
+	width: 90%;
+	height: 90%;
 	position: absolute;
 	top: 35px;
 	left: 5%;
-	width: 90%;
-	height: 90%;
 	margin: auto;
-	/*border: 2px solid green;*/
 }
 
-.result {
+#result {
 	display: none;
+	width: 80%;
+	height: 70%;
 	position: absolute;
 	top: 30%;
 	left: 10%;
-	width: 80%;
-	height: 70%;
 	margin: auto;
-	/*border: 2px solid blue;*/
 }
 
 #win-img {
-	position: relative;
-	/*border: 2px solid purple;*/
-	left: calc(50% - 140px);
 	height: 75%;
+	position: relative;
+	left: calc(50% - 140px);
 }
 
 #winner {
-	position: relative;
-	/*border: 2px solid black;*/
 	width: 100%;
 	height: 20%;
+	position: relative;
 	text-align: center;
 	font-size: 30px;
 	font-family: 'Chela One';
@@ -147,19 +94,10 @@
 
 .player {
 	display: none;
-	/*border: 2px solid orange;*/
+	width: 80%;
 	position: absolute;
-	font-size: 30px;
 	top: 30%;
 	left: 10%;
-	width: 80%;
-	text-align: center;
-}
-
-#chat-info {
-	position: absolute;
-	width: 100%;
 	font-size: 30px;
 	text-align: center;
-	top: 5%;
 }

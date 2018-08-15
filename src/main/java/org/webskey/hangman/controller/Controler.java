@@ -20,7 +20,6 @@ public class Controler {
 
 	@Autowired
 	private GameEngine gameService;
-
 	private HashMap<Integer, List<User>> location;
 
 	@RequestMapping("/")
@@ -34,13 +33,15 @@ public class Controler {
 	@MessageMapping("/room/{num}/setWord")
 	@SendTo("/broker/room/{num}")
 	public Hangman setGame(Hangman hangman) throws Exception {	
-		return gameService.setGame(hangman.getWord());
+		gameService.setGame(hangman.getWord());
+		return gameService.getHangman();
 	}
 
 	@MessageMapping("/room/{num}")
 	@SendTo("/broker/room/{num}")
 	public Hangman play(Hangman hangman) throws Exception {	
-		return gameService.play(hangman.getLetter());
+		gameService.play(hangman.getLetter());
+		return gameService.getHangman();
 	}
 
 	@MessageMapping("/usermap")
