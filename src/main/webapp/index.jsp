@@ -21,6 +21,7 @@
 <script src="/main.js"></script>
 <script src="/game.js"></script>
 <script src="/chat.js"></script>
+<script src="/room.js"></script>
 </head>
 
 <body>

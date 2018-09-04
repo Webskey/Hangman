@@ -2,6 +2,7 @@ package org.webskey.hangman.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,8 +48,13 @@ public class Controler {
 	@MessageMapping("/usermap")
 	@SendTo("/broker/usermap")
 	public Map<Integer, List<User>> userMap(User user) throws Exception {	
-		Optional.ofNullable(user.getPrevRoom()).ifPresent(x -> location.get(x).remove(user));
-		location.get(user.getRoom()).add(user);
+		Optional.ofNullable(user.getPrevRoom()).ifPresent(x -> {
+			for(Iterator<User> iterator = location.get(x).iterator(); iterator.hasNext();) {				
+				if(iterator.next().getUsername().equals(user.getUsername()))
+					iterator.remove();
+			}			
+		});		
+		location.get(user.getRoom()).add(user);		
 		return location;
 	}
 }

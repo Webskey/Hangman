@@ -1,3 +1,16 @@
+function player1(){
+	player = 1;	
+	$("#player1").show();
+	$('.letter-button').prop("disabled", true);
+	$("#word").focus();
+}
+
+function player2(){
+	player = 2;
+	$("#player2").show();	
+	$('.letter-button').attr("disabled", false);
+}
+
 function startGame(){
 	$("#game-div").show();
 	$(".game-progress").show();
@@ -6,13 +19,31 @@ function startGame(){
 	$("#player2").hide();
 }
 
+function setWord(){
+	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': $('#word').val()}));
+	$('#word').val("");
+}
+
+function play(letter, guess, attempts) {	
+	$('#guess').text(guess);
+	$('#attempts').text("Attempts: " + attempts);
+	$('#' + (attempts + 1) + '-attempts').hide();
+}
+
+function letterClicked(value) {	
+	$('#' + value).prop("disabled", true);	
+	stompClient.send("/receiver/room/" + room, {}, JSON.stringify({'letter': value}));
+}
+
 function endGame(attempts){
 	$("#letters").hide();
 	$(".game-progress").hide();
+	$('#result').show();
+	
 	if(attempts > 0){
-		won(2);
+		addPoints(player == 2);
 	}else{
-		won(1);
+		addPoints(player == 1);
 	}
 
 	setTimeout(function() {
@@ -24,13 +55,6 @@ function endGame(attempts){
 			player1();
 		}	
 	}, 4000);
-}
-
-function won(winner){
-	if(player == winner)
-	
-	addPoints(player == winner);
-	$('#result').show();
 }
 
 function addPoints(amIWinner){
@@ -45,25 +69,4 @@ function addPoints(amIWinner){
 			});
 		}
 	});
-}
-
-function setWord(){
-	word = $('#word').val();
-	console.log(word);
-	stompClient.send("/receiver/room/" + room + "/setWord", {}, JSON.stringify({'word': $('#word').val()}));
-	$('#word').val("");
-}
-
-function letterClicked(value) {	
-	var id = "#" + value;
-	$(id).prop("disabled", true);	
-	stompClient.send("/receiver/room/" + room, {}, JSON.stringify({'letter': value}));
-}
-
-function play(letter, guess, attempts) {	
-	console.log("Choosen letter : " + letter);	
-	$('#guess').text(guess);
-	$('#attempts').text("Attempts: " + attempts);
-	//$('.game-progress').hide();
-	$('#' + (attempts + 1) + '-attempts').hide();
 }

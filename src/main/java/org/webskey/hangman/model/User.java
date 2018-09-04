@@ -7,5 +7,4 @@ public class User {
 	private String username;
 	private int room;
 	private int prevRoom;
-	private int pIndex;
 }
