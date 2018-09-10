@@ -1,16 +1,19 @@
 package org.webskey.hangman.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.webskey.hangman.model.Hangman;
 import org.webskey.hangman.model.User;
@@ -24,7 +27,8 @@ public class Controler {
 	private HashMap<Integer, List<User>> location;
 
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("letters", Arrays.asList(new String[]{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","Y","X","Z"}));
 		location = new HashMap<>();
 		for(int i = 0; i < 5; i++)
 			location.put(i, new ArrayList<>());

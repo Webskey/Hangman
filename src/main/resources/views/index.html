@@ -1,7 +1,4 @@
-<%@ page pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html>
 <head>
 <meta charset="utf-8">
@@ -57,12 +54,10 @@
 		<div id="game-div">
 			<span id="guess"></span> <span id="attempts"></span>
 			<div id="letters">
-				<c:forTokens
-					items="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,Y,X,Z"
-					delims="," var="name">
-					<button id="${name}" class="btn btn-default letter-button"
-						onclick="letterClicked(this.value)" value="${name}">${name}</button>
-				</c:forTokens>
+				<button th:each="letter : ${letters}" th:id="${letter}"
+					class="btn btn-default letter-button"
+					th:onclick="'letterClicked(\''+${letter}+'\');'"
+					th:value="${letter}" th:text=${letter}></button>
 			</div>
 
 			<img class="game-progress" id="0-attempts" alt="0 attempts"

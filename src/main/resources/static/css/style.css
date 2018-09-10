@@ -58,7 +58,7 @@
 	border: 1px solid #c0c0c0;
 }
 
-.game-div {
+#game-div {
 	display: none;
 	width: 90%;
 	height: 90%;
